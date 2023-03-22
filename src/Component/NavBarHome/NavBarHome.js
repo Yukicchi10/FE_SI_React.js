@@ -2,9 +2,9 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import LogoSI from '../Img/LogoSI.png'
-import LogoIPI from '../Img/LogoIPI.png'
-import PDFskripsi from '../PDF/PedomanSkripsiSI2022.pdf'
+import LogoSI from '../../Img/LogoSI.png'
+import LogoIPI from '../../Img/LogoIPI.png'
+import PDFskripsi from '../../PDF/PedomanSkripsiSI2022.pdf'
 import './NavBarHome.css'
 
 function BasicExample() {

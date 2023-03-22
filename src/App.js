@@ -1,10 +1,12 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from './Pages/Home/Home';
+import Home from './Pages/HomePage/Home/Home';
 import LoginMahasiswa from './Pages/Auth/LoginMahasiswa/LoginMahasiswa';
 import LoginDosen from './Pages/Auth/LoginDosen/LoginDosen';
 import LoginAdmin from './Pages/Auth/LoginAdmin/LoginAdmin';
-import AboutUs from './Pages/AboutUs/AboutUs';
+import AboutUs from './Pages/HomePage/AboutUs/AboutUs';
+import { DashboardMahasiswa } from './Pages/Session/Mahasiswa/Dashboard/DashboardMahasiswa';
+import AbsenMahasiswa from './Pages/Session/Mahasiswa/Absen Mahasiswa/AbsenMahasiswa';
 
 
 function App() {
@@ -16,6 +18,9 @@ function App() {
       <Route path='/home/login-Dosen' element={<LoginDosen />} />
       <Route path='/home/login-Admin' element={<LoginAdmin />} />
       <Route path='/home/About-Us' element={<AboutUs />} />
+
+      <Route path='/mahasiswa/dashboard' element={<DashboardMahasiswa/> } />
+      <Route path='/mahasiswa/absen' element={<AbsenMahasiswa/> } />
     </Routes>
     </BrowserRouter>
    

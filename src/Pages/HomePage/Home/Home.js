@@ -1,8 +1,8 @@
 import React from 'react'
-import NavBarHome from '../../NavBarHome/NavBarHome'
+import NavBarHome from '../../../Component/NavBarHome/NavBarHome'
 import { Col, Container, Row } from 'react-bootstrap'
-import Exam from '../../Img/exam.png'
-import LogoSI from '../../Img/LogoSI.png'
+import Exam from '../../../Img/exam.png'
+import LogoSI from '../../../Img/LogoSI.png'
 import './Home.css';
 
 

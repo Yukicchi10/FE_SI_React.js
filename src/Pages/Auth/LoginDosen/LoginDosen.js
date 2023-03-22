@@ -1,5 +1,5 @@
 import React from 'react'
-import NavBarHome from '../../../NavBarHome/NavBarHome'
+import NavBarHome from '../../../Component/NavBarHome/NavBarHome'
 import {
   MDBContainer,
   MDBCardImage,

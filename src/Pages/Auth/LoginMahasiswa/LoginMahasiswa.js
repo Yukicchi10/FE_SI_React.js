@@ -2,7 +2,7 @@ import React from 'react'
 import axios from "axios";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import NavBarHome from '../../../NavBarHome/NavBarHome'
+import NavBarHome from '../../../Component/NavBarHome/NavBarHome'
 import {MDBContainer, MDBCardImage, MDBRow, MDBCol, } from 'mdb-react-ui-kit';
 import { Button } from "react-bootstrap";
 import logo from '../../../Img/LogoSI.png'
