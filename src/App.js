@@ -5,8 +5,8 @@ import LoginMahasiswa from './Pages/Auth/LoginMahasiswa/LoginMahasiswa';
 import LoginDosen from './Pages/Auth/LoginDosen/LoginDosen';
 import LoginAdmin from './Pages/Auth/LoginAdmin/LoginAdmin';
 import AboutUs from './Pages/HomePage/AboutUs/AboutUs';
-import { DashboardMahasiswa } from './Pages/Session/Mahasiswa/Dashboard/DashboardMahasiswa';
 import AbsenMahasiswa from './Pages/Session/Mahasiswa/Absen Mahasiswa/AbsenMahasiswa';
+import DashboardMahasiswa from './Pages/Session/Mahasiswa/Dashboard/DashboardMahasiswa';
 
 
 function App() {

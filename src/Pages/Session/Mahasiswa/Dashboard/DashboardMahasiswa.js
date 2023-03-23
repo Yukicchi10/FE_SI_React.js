@@ -1,8 +1,13 @@
-import React from 'react'
+import SideBar from '../../../../Component/SideBar';
+import TopNavigation from '../../../../Component/TopNavigation';
 
-
-export const DashboardMahasiswa = () => {
+function App() {
   return (
-    <div></div>
-  )
+    <div className="flex">
+      <SideBar/>
+      <TopNavigation/>
+    </div>
+  );
 }
+
+export default App;

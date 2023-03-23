@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import { Button, Container, Card, Form, Table } from 'react-bootstrap';
+import ChannelBar from '../../../../Component/ChannelBar';
+import SideBar from '../../../../Component/SideBar';
+import TopNavigation from '../../../../Component/TopNavigation';
 import SideBar1 from '../SideBar1/SideBar1';
 import './AbsenMahasiswa.css'
 
@@ -9,7 +12,8 @@ const AbsenMahasiswa = () => {
   return (
     <div>
         <div>
-        <SideBar1/>
+        <SideBar/>
+        <TopNavigation/>
         </div>
       <Container className='mt-5'>
         <Card>
