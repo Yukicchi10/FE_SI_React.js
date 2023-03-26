@@ -39,7 +39,7 @@ const ThemeIcon = () => {
 };
 
 const Search = () => (
-  <div className='search'>
+  <div className='d-flex search'>
     <input className='search-input' type='text' placeholder='Search...' />
     <FaSearch size='18' className='text-secondary my-auto' />
   </div>

@@ -85,6 +85,19 @@ function LoginMahasiswa(){
                 }
               </div>
             </form>
+           
+        <div className="mb-3">
+          <div className="custom-control custom-checkbox">
+            <input
+              type="checkbox"
+              className="custom-control-input"
+              id="customCheck1"
+            />
+            <label className="custom-control-label" htmlFor="customCheck1">
+             Remember me
+            </label>
+            </div>
+            </div>
             <Button color='' onClick={loginHandler} type="submit" className='btn btn-warning mt-3 w-100' size='lg'>Login</Button>
           </MDBCol>
         </MDBRow>

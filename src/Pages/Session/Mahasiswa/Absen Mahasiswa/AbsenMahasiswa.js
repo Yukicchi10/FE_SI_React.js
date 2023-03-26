@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Container, Card, Form, Table } from 'react-bootstrap';
-import ChannelBar from '../../../../Component/ChannelBar';
 import SideBar from '../../../../Component/SideBar';
 import TopNavigation from '../../../../Component/TopNavigation';
-import SideBar1 from '../SideBar1/SideBar1';
 import './AbsenMahasiswa.css'
 
 const AbsenMahasiswa = () => {
@@ -11,12 +9,11 @@ const AbsenMahasiswa = () => {
 
   return (
     <div>
-        <div>
-        <SideBar/>
         <TopNavigation/>
-        </div>
+        <SideBar/>
+        <div>
       <Container className='mt-5'>
-        <Card>
+       
           <Card.Header>
             <Card.Title><h5 className='labelabsensiswa fw-bold'>ABSENSI SISWA</h5></Card.Title>
           </Card.Header>
@@ -41,7 +38,6 @@ const AbsenMahasiswa = () => {
 
             <Button variant="warning" className='absensiswa'>Absen</Button>
           </Card.Body>
-        </Card>
         
         <Table striped bordered hover size='lg' className='text-center mt-4'>
         <thead>
@@ -75,6 +71,7 @@ const AbsenMahasiswa = () => {
         </tbody>
         </Table>
       </Container>
+      </div>
     </div>
   )
 }
