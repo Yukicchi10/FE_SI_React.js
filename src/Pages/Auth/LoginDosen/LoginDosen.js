@@ -91,7 +91,7 @@ const LoginDosen = () => {
                 }
               </div>
             </form>
-            <Button onClick={loginHandler} type="submit" className='btn btn-success mt-3 w-100' style={{color: 'white'}} size='lg'>Login</Button>
+            <Button onClick={loginHandler} type="submit" className='btnc2 mt-3 w-100' size='lg'>Login</Button>
           </MDBCol>
         </MDBRow>
       </MDBContainer>

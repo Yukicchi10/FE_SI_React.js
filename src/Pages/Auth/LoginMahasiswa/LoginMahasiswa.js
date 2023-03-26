@@ -98,7 +98,7 @@ function LoginMahasiswa(){
             </label>
             </div>
             </div>
-            <Button color='' onClick={loginHandler} type="submit" className='btn btn-warning mt-3 w-100' size='lg'>Login</Button>
+            <Button onClick={loginHandler} type="submit" className='btnc mt-3 w-100' size='lg'>Login</Button>
           </MDBCol>
         </MDBRow>
       </MDBContainer>

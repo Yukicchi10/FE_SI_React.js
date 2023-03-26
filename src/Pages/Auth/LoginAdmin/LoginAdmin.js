@@ -55,7 +55,7 @@ const LoginAdmin = () => {
     <div>
       <NavBarHome/>
       <MDBContainer className="form2">
-        <MDBRow className="justify-content-center auth-form-row">
+        <MDBRow className="h101">
           <MDBCol>
             <p className="text-center h1 fw-bold">LOGIN ADMIN</p>
             <p className="text-center">Selamat datang di E-learning Lemon para pengajar</p>

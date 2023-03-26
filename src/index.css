@@ -21,7 +21,12 @@
   }
 
   .sidebar-icon {
-    margin-top: 15px;
+    margin-top: 10px;
+  }
+
+  .logsi {
+    @apply relative flex items-center justify-center 
+    h-12 w-auto mt-2 mb-2 mx-auto  
   }
 
   .sidebar-tooltip {
@@ -38,7 +43,7 @@
   }
 
   .sidebar-hr {
-    margin-top: 2vh;
+    margin-top: 1vh;
   }
 
   .top-navigation {
@@ -83,9 +88,13 @@
     @apply w-1/5 flex items-center justify-start 
     bg-gray-400 dark:bg-gray-600
     text-gray-500
-    px-2 h-9 ml-0 mr-0 
+    px-8 h-11 ml-0 mr-0 
     rounded-md shadow-md
     transition duration-300 ease-in-out;
+  }
+
+  .search {
+    width: 300px;
   }
 
   .search-input {
