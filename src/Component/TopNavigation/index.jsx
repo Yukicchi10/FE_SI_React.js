@@ -6,9 +6,6 @@ import {
   FaMoon,
   FaSun,
 } from 'react-icons/fa';
-import useDarkMode from '../../hooks/useDarkMode';
-import LogoSI from "../../Img/LogoSI.png"
-import Navbar from 'react-bootstrap/Navbar';
 
 const TopNavigation = () => {
   return (
