@@ -16,8 +16,8 @@ const ProfilMahasiswa = () => {
 
 
   return (
+    <div className='flex flex-column'> 
     <div>
-      <div>
       <SideBar/>
       </div>
       <TopNavigation/>

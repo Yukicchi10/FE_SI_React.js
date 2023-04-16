@@ -36,7 +36,7 @@ const AbsenMahasiswa = () => {
               <Form.Control type="Text" placeholder='Silahkan isi jika berhalangan hadir' />
             </Form.Group>
 
-            <Button variant="warning" className='absensiswa'>Absen</Button>
+            <Button variant="warning" className='absen'>Absen</Button>
           </Card.Body>
         
         <Table striped bordered hover size='lg' className='text-center mt-4'>
