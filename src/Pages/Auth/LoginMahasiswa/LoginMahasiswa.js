@@ -10,7 +10,7 @@ import './LoginMahasiswa.css';
 
 function LoginMahasiswa(){
 
-  const [email, setEmail] = useState("");
+  const [nim, setNIM] = useState("");
   const [password, setPassword] = useState("");
 
   const [validation, setValidation] = useState([]);
@@ -19,7 +19,7 @@ function LoginMahasiswa(){
 
   useEffect(() => {
     if(localStorage.getItem('token')){
-      navigate('/siswa/dasboard');
+      navigate('/mahasiswa/dasboard');
     }
   },[]);
 
@@ -28,7 +28,7 @@ function LoginMahasiswa(){
 
     const formData = new FormData();
 
-    formData.append('email',email);
+    formData.append('nim',nim);
     formData.append('password',password);
 
     await axios.post('/api/auth/login', formData)
@@ -37,7 +37,7 @@ function LoginMahasiswa(){
       console.log(response.data.access_token);
       localStorage.setItem('token',response.data.access_token);
 
-      navigate('/siswa/dasboard');
+      navigate('/mahasiswa/dasboard');
 
     }).catch((error) => {
       console.log(error.response.data);
@@ -63,7 +63,7 @@ function LoginMahasiswa(){
             <form onSubmit={loginHandler}>
               <div className="mb-3">
                 <label htmlFor="password" className="form-label">NPM / NIM Mahasiswa</label>
-                <input label="Alamat Email" type="text" className="form-control" id="emailsiswa" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="NPM/NIM"/>
+                <input label="Alamat Email" type="text" className="form-control" id="emailsiswa" value={nim} onChange={(e) => setNIM(e.target.value)} placeholder="NPM/NIM"/>
                 {
                   validation.email && (
                   <small className="text-danger">

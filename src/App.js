@@ -1,5 +1,8 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import axios from 'axios';
+
+
 import Home from './Pages/HomePage/Home/Home';
 import LoginMahasiswa from './Pages/Auth/LoginMahasiswa/LoginMahasiswa';
 import LoginDosen from './Pages/Auth/LoginDosen/LoginDosen';
@@ -10,9 +13,15 @@ import DashboardMahasiswa from './Pages/Session/Mahasiswa/Dashboard/DashboardMah
 import ProfilMahasiswa from './Pages/Session/Mahasiswa/Profil/ProfilMahasiswa';
 import KalenderAkademik from './Pages/Session/Mahasiswa/KalenderAkademik/KalenderAkademik';
 import DashboardDosen from './Pages/Session/Dosen/DashboardDosen/DashboardDosen';
+import MataKuliah from './Pages/Session/Mahasiswa/MataKuliah/MataKuliah';
 
 
 function App() {
+    axios.defaults.baseURL = 'http://127.0.0.1:8000';
+    // axios.defaults.headers.post['Content-Type'] = 'application/json';
+    // axios.defaults.headers.post['Accept'] = 'application/json';
+    // axios.defaults.withCredentials = true;
+  
   return (
     <BrowserRouter>
     <Routes>
@@ -29,6 +38,7 @@ function App() {
       <Route path='/mahasiswa/absen' element={<AbsenMahasiswa/> } />
       <Route path='/mahasiswa/profil' element={<ProfilMahasiswa/> } />
       <Route path='/mahasiswa/kalender-akademik' element={<KalenderAkademik/> } />
+      <Route path='/mahasiswa/mata-kuliah' element={<MataKuliah/> } />
 
 
      {/* Dosen Session */} 
