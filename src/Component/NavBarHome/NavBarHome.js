@@ -45,7 +45,7 @@ function BasicExample() {
             <NavDropdown.Item href="/home/About-Us">LMS SI</NavDropdown.Item>
             <NavDropdown.Item href="https://institutpendidikan.ac.id/" target="_blank">IPI Garut</NavDropdown.Item>
             <NavDropdown.Item href="https://si.institutpendidikan.ac.id/" target="_blank">Sistem Informasi</NavDropdown.Item>
-            <NavDropdown.Item href="https://si.institutpendidikan.ac.id/" target="_blank">Dosen Pengajar</NavDropdown.Item>
+            <NavDropdown.Item href="/home/profil-dosen" >Dosen Pengajar</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

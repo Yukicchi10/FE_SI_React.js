@@ -13,6 +13,21 @@ const ProfilMahasiswa = () => {
 
   const token = localStorage.getItem("token");
 
+  const fetchData = async () => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    await axios.post('http://127.0.0.1:8000/api/auth/me')
+    .then((response) => {
+      setUser(response.data);
+    })
+  }
+
+  useEffect(() => {
+    if(!token){
+      navigate('/login');
+    }
+
+    fetchData();
+  },[]);
 
 
   return (
@@ -44,7 +59,7 @@ const ProfilMahasiswa = () => {
 
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>NIM</Form.Label>
-                <Form.Control type="email" value={user.nisn} disabled/>
+                <Form.Control type="email" value={user.nim} disabled/>
                 <Form.Text className="text-muted">
                 </Form.Text>
               </Form.Group>

@@ -58,7 +58,7 @@ const LoginDosen = () => {
         <MDBRow className="h101">
           <MDBCol>
             <p className="text-center h1 fw-bold">LOGIN DOSEN</p>
-            <p className="text-center">Selamat datang di E-learning Lemon para pengajar</p>
+            <p className="text-center">Selamat datang di LMS Sistem Informasi</p>
               {
                 validation.error && (
                   <div className="alert alert-danger" role="alert">

@@ -1,0 +1,23 @@
+.cardosen {
+    height: 90vh; 
+    align-items: center;
+}
+
+.fotodosen {
+    height: 350px;
+    width: auto;
+}
+
+.nidn {
+    margin-top: -5px;
+}
+
+.nidn2 {
+    margin-top: -10px;
+}
+
+
+.whatsapp {
+    height: 25px;
+    width: auto;
+}

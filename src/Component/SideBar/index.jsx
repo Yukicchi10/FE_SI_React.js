@@ -12,8 +12,8 @@ const SideBar = () => {
         <SideBarIcon icon={<FaCalendar size="25" />} text="Absensi" url='/mahasiswa/absen' />
         <SideBarIcon icon={<FaChalkboardTeacher size="25" />} text="Mata Kuliah" url='/mahasiswa/mata-kuliah' />
         <Divider/>
-        <SideBarIcon icon={<FaBook size="25" />} text="Materi" url='/mahasiswa/materi' />
-        <SideBarIcon icon={<FaTasks size="25" />} text="Tugas" url='/mahasiswa/materi' />
+        <SideBarIcon icon={<FaBook size="25" />} text="Materi" url='/mahasiswa/materi-mahasiswa' />
+        <SideBarIcon icon={<FaTasks size="25" />} text="Tugas" url='/mahasiswa/tugas-mahasiswa' />
         <Divider />
         <SideBarIcon icon={<FaCalendarAlt size="25" />} text="Kalender Akademik" url='/mahasiswa/kalender-akademik' />
         <SideBarIcon icon={<FaUserCog size="25" />} text="Profil" url='/mahasiswa/profil' />
