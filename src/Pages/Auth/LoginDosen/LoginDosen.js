@@ -25,7 +25,7 @@ const LoginDosen = () => {
 
   useEffect(() => {
     if(localStorage.getItem('token')){
-      navigate('/guru/dashboard');
+      navigate('/dosen/dashboard');
     }
   },[]);
 
@@ -37,13 +37,13 @@ const LoginDosen = () => {
     formData.append('email',email);
     formData.append('password',password);
 
-    await axios.post('api/auth/gurulogin', formData)
+    await axios.post('api/auth/dosen-login', formData)
     .then((response) => {
 
       console.log(response.data.access_token);
       localStorage.setItem('token',response.data.access_token);
 
-      navigate('/guru/dasboard');
+      navigate('/dosen/dashboard');
 
     }).catch((error) => {
       console.log(error.response.data);
