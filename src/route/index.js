@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { LoginAdmin, LoginDosen, LoginMahasiswa } from "./../Pages/Auth";
-import { DashboardAdminPage } from "./../Pages/Admin";
+import { DashboardAdminPage, LecturerTable } from "./../Pages/Admin";
 import {
   AbsenMahasiswa,
   DashboardStudent,
@@ -29,6 +29,7 @@ export function RoutePage() {
 
       {/* Admin Session */}
       <Route path="/admin/dashboard" element={<DashboardAdminPage />} />
+      <Route path="/admin/manage-lecturer" element={<LecturerTable />} />
 
       {/* Dosen Session */}
       <Route path="/lecturer/dashboard" element={<DashboardDosenPage />} /> 
