@@ -37,8 +37,9 @@ function TopNavigation () {
     await axios.post('http://127.0.0.1:8000/api/auth/logout')
     .then(() => {
       localStorage.removeItem("token");
+      localStorage.removeItem("role")
 
-      navigate('/home/login-mahasiswa');
+      navigate('/');
     })
   }
 

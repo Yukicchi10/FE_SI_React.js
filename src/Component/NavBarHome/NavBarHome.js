@@ -34,9 +34,9 @@ function BasicExample() {
           <Nav className="navbar-text">
             <Nav.Link href="/">Home</Nav.Link>
             <NavDropdown title="Login" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/home/login-mahasiswa">Mahasiswa</NavDropdown.Item>
-              <NavDropdown.Item href="/home/login-dosen">Dosen</NavDropdown.Item>
-              <NavDropdown.Item href="/home/login-admin">Admin</NavDropdown.Item>
+              <NavDropdown.Item href="/login">Mahasiswa</NavDropdown.Item>
+              <NavDropdown.Item href="/login/lecturer">Dosen</NavDropdown.Item>
+              <NavDropdown.Item href="/login/admin">Admin</NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Panduan" id="basic-nav-dropdown">
               <NavDropdown.Item href={PDFskripsi} target="_blank ">Panduan Skripsi 2022</NavDropdown.Item>
