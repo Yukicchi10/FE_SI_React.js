@@ -56,7 +56,6 @@ export function AdminClassForm({ open, onClose, method, initialValue, onSuccess 
               label="Nama Kelas"
               placeholder="Masukkan Nama Kelas"
               required
-              disabled={method === "view"}
             />
           </Grid>
           <Grid item md={6} xs={12}>
@@ -66,7 +65,6 @@ export function AdminClassForm({ open, onClose, method, initialValue, onSuccess 
               label="Angkatan"
               placeholder="Pilih Angkatan(Tahun Masuk)"
               options={YEAR_OPTIONS}
-              disabled={method === "view"}
             />
           </Grid>
           

@@ -1,37 +1,51 @@
-import { Grid, } from "@mui/material";
+import { Grid } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
 import { ModalForm } from "../../../Component/Modal";
 import { DateForm, SelectForm, TextFieldForm } from "../../../Component/Input";
 import { useForm } from "react-hook-form";
 import { GENDER_OPTIONS, RELIGI_OPTIONS } from "../../../lib/constant";
-import apiManageLecturer from "../../../lib/api/admin/manageLecture";
+import { useParams } from "react-router-dom";
+import apiManageStudent from "../../../lib/api/admin/manageStudent";
 
 const INITIAL = {
   nama: "",
-  nidn: "",
+  nim: "",
   email: "",
   tempat: "",
-  tgl_lahir: new Date(),
+  // tgl_lahir: new Date(),
   jns_kelamin: "",
   agama: "",
   alamat: "",
   telepon: "",
   kd_pos: "",
+  nama_ayah: "",
+  nama_ibu: "",
+};
+const convertDate = (date) => {
+  return date.toISOString().slice(0, 10);
 };
 
-function LecturerForm({ open, onClose, method, initialValue, onSuccess }) {
+export function StudentForm({
+  open,
+  onClose,
+  method,
+  initialValue,
+  onSuccess,
+}) {
+  const { id } = useParams();
   const [initialBody, setInitialBody] = useState(INITIAL);
   const { control, handleSubmit, reset } = useForm({
     mode: "onSubmit",
+    // resolver: yupResolver(batchSchema),
     defaultValues: useMemo(() => {
       return initialBody;
     }, [initialBody]),
   });
-
+  console.log(initialValue);
   useEffect(() => {
     const getData = () => {
       if (initialValue) {
-        initialValue.tgl_lahir = new Date(initialValue.tgl_lahir)
+        initialValue.tgl_lahir = new Date(initialValue.tgl_lahir);
         setInitialBody(initialValue);
         reset(initialValue);
       }
@@ -40,12 +54,15 @@ function LecturerForm({ open, onClose, method, initialValue, onSuccess }) {
   }, [initialValue]);
 
   const onSubmit = async (data) => {
+    const body = data;
+    // body.tgl_lahir = convertDate(data.tgl_lahir)
+    body.id_class = id;
     if (method === "add") {
-      await apiManageLecturer.store(data).then(() => {
+      await apiManageStudent.store(body).then(() => {
         onSuccess();
       });
     } else {
-      await apiManageLecturer.update(data.id, data).then(() => {
+      await apiManageStudent.update(data.id, body).then(() => {
         onSuccess();
       });
     }
@@ -96,9 +113,9 @@ function LecturerForm({ open, onClose, method, initialValue, onSuccess }) {
           <Grid item md={6} xs={12}>
             <TextFieldForm
               control={control}
-              name="nidn"
-              label="NIDN"
-              placeholder="Masukkan NIDN"
+              name="nim"
+              label="NIM"
+              placeholder="Masukkan NIM"
               required
               disabled={method === "view"}
             />
@@ -138,22 +155,44 @@ function LecturerForm({ open, onClose, method, initialValue, onSuccess }) {
           <Grid item md={6} xs={12}>
             <TextFieldForm
               control={control}
-              name="tempat"
-              label="Tempat Lahir"
-              placeholder="Masukkan Tempat Lahir"
+              name="nama_ayah"
+              label="Nama Ayah"
+              placeholder="Masukkan Nama Ayah"
               required
               disabled={method === "view"}
             />
           </Grid>
           <Grid item md={6} xs={12}>
-            <DateForm
-              label="Tanggal Lahir"
+            <TextFieldForm
               control={control}
-              name="tgl_lahir"
-              placeholder="Masukkan Tanggal Lahir"
+              name="nama_ibu"
+              label="Nama Ibu"
+              placeholder="Masukkan Nama Ibu"
+              required
               disabled={method === "view"}
             />
           </Grid>
+          <>
+            <Grid item md={6} xs={12}>
+              <TextFieldForm
+                control={control}
+                name="tempat"
+                label="Tempat Lahir"
+                placeholder="Masukkan Tempat Lahir"
+                required
+                disabled={method === "view"}
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <DateForm
+                label="Tanggal Lahir"
+                control={control}
+                name="tgl_lahir"
+                placeholder="Masukkan Tanggal Lahir"
+                disabled={method === "view"}
+              />
+            </Grid>
+          </>
 
           <Grid item md={6} xs={12}>
             <TextFieldForm
@@ -180,5 +219,3 @@ function LecturerForm({ open, onClose, method, initialValue, onSuccess }) {
     </form>
   );
 }
-
-export default LecturerForm;
