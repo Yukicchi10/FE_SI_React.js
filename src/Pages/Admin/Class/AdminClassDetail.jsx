@@ -15,6 +15,7 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  Grid,
 } from "@mui/material";
 import { FiMenu } from "react-icons/fi";
 import { useParams } from "react-router-dom";
@@ -22,15 +23,20 @@ import { ModalDelete } from "../../../Component/Modal";
 import { StudentForm } from "./StudentForm";
 import apiManageClass from "../../../lib/api/admin/manageClass";
 import apiManageStudent from "../../../lib/api/admin/manageStudent";
+import apiManageSubject from "../../../lib/api/admin/manageSubject";
+import { SubjectForm } from "./SubjectForm";
 
 export function AdminClassDetail() {
   const [data, setData] = useState();
   const { id } = useParams();
   const [value, setValue] = useState(0);
   const [openDelete, setOpenDelete] = useState(false);
+  const [openDeleteMapel, setOpenDeleteMapel] = useState(false);
   const [openForm, setOpenForm] = useState(false);
+  const [openFormMapel, setOpenFormMapel] = useState(false);
   const [openView, setOpenView] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
+  const [openEditMapel, setOpenEditMapel] = useState(false);
   const [selectedData, setSelectedData] = useState();
   const [reloadTable, setReloadTable] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -60,6 +66,12 @@ export function AdminClassDetail() {
     setOpenDelete(false);
   };
 
+  const handleDeleteMapel = async () => {
+    await apiManageSubject.deleted(selectedData.id);
+    setReloadTable(!reloadTable);
+    setOpenDeleteMapel(false);
+  };
+
   return (
     <Layout>
       <div class="relative bg-gradient-to-r from-blue-200 to-blue-400 text-blue-800 shadow-lg rounded-lg p-6">
@@ -77,13 +89,20 @@ export function AdminClassDetail() {
           >
             <MenuItem
               onClick={() => {
-                handleClose()
+                handleClose();
                 setOpenForm(true);
               }}
             >
               Tambah Mahasiswa
             </MenuItem>
-            <MenuItem onClick={handleClose}>Tambah Mata Kuliah</MenuItem>
+            <MenuItem
+              onClick={() => {
+                handleClose();
+                setOpenFormMapel(true);
+              }}
+            >
+              Tambah Mata Kuliah
+            </MenuItem>
           </Menu>
         </div>
       </div>
@@ -141,6 +160,46 @@ export function AdminClassDetail() {
           </Table>
         </TableContainer>
       </TabPanel>
+      <TabPanel value={value} index={1}>
+        <Grid container columnSpacing={2} rowSpacing={2} className="mt-2">
+          {data?.mapel.map((row) => (
+            <Grid item xl={2} lg={3} md={4} sm={6} xs={12}>
+              <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                <div class="px-6 py-4">
+                  <div class="font-bold text-xl">{row.nama_mapel}</div>
+                  <div class="text-gray-700 text-base">
+                    {row.day} | {row.start_time.toString()} - {row.end_time.toString()}
+                  </div>
+                  <div className="bg-gray-50 p-2 rounded">
+                    <div className="text-sm">Dosen:</div>
+                    <b>{row.teacher_name}</b>
+                  </div>
+                </div>
+                <div class="flex gap-2 justify-center px-6 py-4">
+                  <span
+                    onClick={() => {
+                      setSelectedData(row);
+                      setOpenEditMapel(true);
+                    }}
+                    class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 cursor-pointer"
+                  >
+                    Edit
+                  </span>
+                  <span
+                    onClick={() => {
+                      setSelectedData(row);
+                      setOpenDeleteMapel(true);
+                    }}
+                    class="inline-block bg-red-500 rounded-full px-3 py-1 text-sm font-semibold text-white cursor-pointer"
+                  >
+                    Hapus
+                  </span>
+                </div>
+              </div>
+            </Grid>
+          ))}
+        </Grid>
+      </TabPanel>
       <StudentForm
         method="add"
         open={openForm}
@@ -170,6 +229,30 @@ export function AdminClassDetail() {
         open={openDelete}
         onClose={() => setOpenDelete(false)}
         handleDelete={handleDelete}
+      />
+      <SubjectForm
+        method="add"
+        open={openFormMapel}
+        onClose={() => setOpenFormMapel(false)}
+        onSuccess={() => {
+          setReloadTable(!reloadTable);
+          setOpenFormMapel(false);
+        }}
+      />
+      <SubjectForm
+        method="edit"
+        open={openEditMapel}
+        initialValue={selectedData}
+        onClose={() => setOpenEditMapel(false)}
+        onSuccess={() => {
+          setReloadTable(!reloadTable);
+          setOpenEditMapel(false);
+        }}
+      />
+      <ModalDelete
+        open={openDeleteMapel}
+        onClose={() => setOpenDeleteMapel(false)}
+        handleDelete={handleDeleteMapel}
       />
     </Layout>
   );

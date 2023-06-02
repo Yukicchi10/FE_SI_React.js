@@ -41,7 +41,7 @@ export function StudentForm({
       return initialBody;
     }, [initialBody]),
   });
-  console.log(initialValue);
+  
   useEffect(() => {
     const getData = () => {
       if (initialValue) {

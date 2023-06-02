@@ -74,3 +74,26 @@ export const YEAR_OPTIONS = [
     value: "2015",
   },
 ];
+
+export const DAY_OPTIONS = [
+  {
+    label: "Senin",
+    value: "Senin",
+  },
+  {
+    label: "Selasa",
+    value: "Selasa",
+  },
+  {
+    label: "Rabu",
+    value: "Rabu",
+  },
+  {
+    label: "Kamis",
+    value: "Kamis",
+  },
+  {
+    label: "Jumat",
+    value: "Jumat",
+  },
+];

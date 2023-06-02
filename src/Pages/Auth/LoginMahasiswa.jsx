@@ -60,7 +60,7 @@ export function LoginMahasiswa(){
               }
             <form onSubmit={loginHandler}>
               <div className="mb-3">
-                <label htmlFor="password" className="form-label">NPM / NIM Mahasiswa</label>
+                <label htmlFor="password" className="form-label">Alamat Email</label>
                 <input label="Alamat Email" type="text" className="form-control" id="emailsiswa" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="NPM/NIM"/>
                 {
                   validation.email && (
