@@ -1,4 +1,4 @@
-import { FormControl, Grid, TextField } from "@mui/material";
+import { Grid, } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
 import { ModalForm } from "../../../Component/Modal";
 import { DateForm, SelectForm, TextFieldForm } from "../../../Component/Input";
@@ -21,7 +21,7 @@ const INITIAL = {
 
 function LecturerForm({ open, onClose, method, initialValue, onSuccess }) {
   const [initialBody, setInitialBody] = useState(INITIAL);
-  const { control, handleSubmit, watch, reset } = useForm({
+  const { control, handleSubmit, reset } = useForm({
     mode: "onSubmit",
     // resolver: yupResolver(batchSchema),
     defaultValues: useMemo(() => {
@@ -49,7 +49,8 @@ function LecturerForm({ open, onClose, method, initialValue, onSuccess }) {
         onSuccess();
       });
     }
-    console.log(data);
+    setInitialBody(INITIAL);
+    reset(INITIAL);
   };
 
   return (

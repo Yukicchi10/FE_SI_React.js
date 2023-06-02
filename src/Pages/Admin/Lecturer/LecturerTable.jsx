@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaTrashAlt, FaPencilAlt, FaEye } from "react-icons/fa";
 import { Layout } from "../Layout/Layout";
 import {
@@ -13,7 +13,6 @@ import {
 } from "@mui/material";
 import apiManageLecturer from "../../../lib/api/admin/manageLecture";
 import { ModalDelete } from "../../../Component/Modal";
-import { useForm } from "react-hook-form";
 import LecturerForm from "./LecturerForm";
 
 export function LecturerTable() {
