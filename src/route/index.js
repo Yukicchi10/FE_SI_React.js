@@ -12,8 +12,7 @@ import {
 } from "./../Pages/Mahasiswa";
 import Home from "./../Pages/HomePage/Home/Home";
 import AboutUs from "./../Pages/HomePage/AboutUs/AboutUs";
-import ProfilDosen from "./../Pages/HomePage/ProfilDosen/ProfilDosen";
-import { DashboardDosenPage } from "./../Pages/Dosen";
+import { DashboardDosenPage, ProfilDosen } from "./../Pages/Dosen";
 import TugasMahasiswa from "./../Pages/Mahasiswa/TugasMahasiswa";
 
 export function RoutePage() {    
@@ -34,7 +33,8 @@ export function RoutePage() {
       <Route path="/admin/manage-lecturer" element={<LecturerTable />} />
 
       {/* Dosen Session */}
-      <Route path="/lecturer/dashboard" element={<DashboardDosenPage />} /> 
+      <Route path="/lecturer/dashboard" element={<DashboardDosenPage />} />
+      <Route path="/lecturer/profil" element={<ProfilDosen />} /> 
 
       {/* Mahasiswa Session */}
       <Route path="/dashboard" element={<DashboardStudent />} />
