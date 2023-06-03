@@ -1,5 +1,5 @@
 import { FaBook, FaCalendar, FaCalendarAlt, FaChalkboardTeacher, FaHome, FaTasks, FaUserCog } from 'react-icons/fa';
-import logoSI from '../../Img/LogoSI1.png'
+import logoSI from '../../../Img/LogoSI1.png'
 
 const SideBar = () => {
   return (
@@ -7,7 +7,7 @@ const SideBar = () => {
                   bg-white dark:bg-gray-900 shadow-lg">
         <img src={logoSI} className='logsi'/>
         <Divider/>
-        <SideBarIcon icon={<FaHome size="28"/>} text="Dashboard" url='/mahasiswa/dashboard' />
+        <SideBarIcon icon={<FaHome size="28"/>} text="Dashboard" url='/dashboard' />
         <Divider />
         <SideBarIcon icon={<FaCalendar size="25" />} text="Absensi" url='/mahasiswa/absen' />
         <SideBarIcon icon={<FaChalkboardTeacher size="25" />} text="Mata Kuliah" url='/mahasiswa/mata-kuliah' />

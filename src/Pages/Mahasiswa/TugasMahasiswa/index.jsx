@@ -1,20 +1,12 @@
-import React from 'react'
-import { Button, Container, Card, Form, Table, Col } from 'react-bootstrap';
-import TopNavigation from '../../../Component/TopNavigation';
-import SideBar from '../../../Component/SideBar';
-
+import React from "react";
+import { Layout } from "../Layout/Layout";
 
 const TugasMahasiswa = () => {
   return (
-    <div>
-        <TopNavigation/>
-        <SideBar/>
-        <div>
-        <Container className='mt-5'></Container>
+    <Layout>
+      <h1 className="text-center">Mahasiswa page</h1>
+    </Layout>
+  );
+};
 
-        </div>
-</div>
-  )
-}
-
-export default TugasMahasiswa
+export default TugasMahasiswa;

@@ -167,15 +167,19 @@ export function AdminClassDetail() {
               <div class="max-w-sm rounded overflow-hidden shadow-lg">
                 <div class="px-6 py-4">
                   <div class="font-bold text-xl">{row.nama_mapel}</div>
-                  <div class="text-gray-700 text-base">
-                    {row.day} | {row.start_time.toString()} - {row.end_time.toString()}
-                  </div>
+                  <div>{row.sks} SKS</div> 
+                  <div className="text-sm font-bold">Dosen:</div>
+                  <div>{row.teacher_name}</div>
                   <div className="bg-gray-50 p-2 rounded">
-                    <div className="text-sm">Dosen:</div>
-                    <b>{row.teacher_name}</b>
+                    {" "}
+                    <div class="text-gray-700 text-base">
+                      {row.day} | {row.start_time.toString()} -{" "}
+                      {row.end_time.toString()}
+                    </div>
+                    <div class="text-gray-700 text-base">{row.room}</div>
                   </div>
                 </div>
-                <div class="flex gap-2 justify-center px-6 py-4">
+                <div class="flex gap-2 justify-center px-6 pb-4">
                   <span
                     onClick={() => {
                       setSelectedData(row);

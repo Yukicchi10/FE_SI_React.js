@@ -13,6 +13,8 @@ const INITIAL = {
   nama_mapel: "",
   deskripsi_mapel: "",
   day: "",
+  room:"",
+  sks:"",
   start_time: new Date(),
   end_time: new Date(),
 };
@@ -109,6 +111,27 @@ export function SubjectForm({
               disabled={method === "view"}
               multiline={3}
               minRows={3}
+            />
+          </Grid>
+          <Grid item md={6} xs={12}>
+            <TextFieldForm
+              control={control}
+              name="room"
+              label="Nama Ruang"
+              placeholder="Masukkan Nama Ruang"
+              required
+              disabled={method === "view"}
+            />
+          </Grid>
+          <Grid item md={6} xs={12}>
+            <TextFieldForm
+              control={control}
+              name="sks"
+              label="Jumlah SKS"
+              placeholder="Masukkan Jumlah SKS"
+              type="number"
+              required
+              disabled={method === "view"}
             />
           </Grid>
 

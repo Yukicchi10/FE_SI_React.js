@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import TopNavigation from "../../../Component/TopNavigation";
-import SideBar from "../../../Component/SideBar";
+import SideBar from "./Sidebar";
 
 export function Layout({ children }) {
   const isAuthenticated = localStorage.getItem("token");
