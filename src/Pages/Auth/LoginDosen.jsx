@@ -14,7 +14,7 @@ import axios from "axios";
 
 export const LoginDosen = () => {
 
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("novi@mail.com");
   const [password, setPassword] = useState("123456");
 
   const [validation, setValidation] = useState([]);
@@ -40,8 +40,7 @@ export const LoginDosen = () => {
 
       localStorage.setItem('token',response.data.access_token);
       localStorage.setItem('role',response.data.role);
-
-      navigate('/lecturer/dashboard');
+      window.location.href = "/lecturer/dashboard"
 
     }).catch((error) => {
       console.log(error.response.data);

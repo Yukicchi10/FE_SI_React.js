@@ -34,8 +34,7 @@ export function LoginMahasiswa(){
       console.log(response.data.access_token);
       localStorage.setItem('token',response.data.access_token);
       localStorage.setItem('role',response.data.role);
-
-      navigate('/dashboard');
+      window.location.href = "/dashboard"
 
     }).catch((error) => {
       console.log(error.response.data);

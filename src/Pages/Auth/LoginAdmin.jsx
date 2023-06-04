@@ -34,8 +34,7 @@ export const LoginAdmin = () => {
 
       localStorage.setItem('token',response.data.access_token);
       localStorage.setItem('role',response.data.role);
-
-      navigate('/admin/dashboard');
+      window.location.href = "/admin/dashboard"
 
     }).catch((error) => {
       console.log(error.response.data);

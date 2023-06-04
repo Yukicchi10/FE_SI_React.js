@@ -1,62 +1,67 @@
-import React from "react";
-import { Button, Container, Card, Form, Table, Col } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
 import { Layout } from "../Layout/Layout";
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
+import { FaEye } from "react-icons/fa";
+import apiMahasiswaClass from "../../../lib/api/mahasiswa/class";
 
 export const MataKuliah = () => {
+  const [mapel, setMapel] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      await apiMahasiswaClass
+        .subjectList()
+        .then((res) => setMapel(res.data.data));
+    };
+    getData();
+  }, []);
   return (
     <Layout>
-      <Card.Header>
-        <Card.Title>
-          <h5 className="labelabsensiswa fw-bold">Mata Kuliah</h5>
-        </Card.Title>
-      </Card.Header>
-      <Card>
-        <Card.Header as="h5">Featured</Card.Header>
-        <Card.Body>
-          <Card.Title>Special title treatment</Card.Title>
-          <Card.Text>
-            With supporting text below as a natural lead-in to additional
-            content.
-          </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
-        </Card.Body>
-      </Card>
-
-      <Form.Label className="fw-bold mt-4">Tahun Studi</Form.Label>
-      <Form.Select
-        as={Col}
-        aria-label="Default select example"
-        className="mb-2"
-      >
-        <option>Open this select menu</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </Form.Select>
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-
-      <Table striped bordered hover size="lg" className="text-center mt-4">
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Tingkat</th>
-            <th>Kelas</th>
-            <th>Kode</th>
-            <th>Mata Kuliah</th>
-            <th>SKS</th>
-            <th>Dosen</th>
-            <th>Hari/Jam</th>
-            <th>Ruangan</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td colSpan={9}>Data tidak ditemukan</td>
-          </tr>
-        </tbody>
-      </Table>
+      <TableContainer component={Paper} className="mt-2">
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell className="!font-bold">Nama</TableCell>
+              <TableCell className="!font-bold">SKS</TableCell>
+              <TableCell className="!font-bold">Dosen</TableCell>
+              <TableCell className="!font-bold">Ruang</TableCell>
+              <TableCell className="!font-bold">Hari</TableCell>
+              <TableCell className="!font-bold">Waktu</TableCell>
+              <TableCell className="!font-bold"></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {mapel.map((row) => (
+              <TableRow key={row.id}>
+                <TableCell>{row.nama_mapel}</TableCell>
+                <TableCell>{row.sks} SKS</TableCell>
+                <TableCell>{row.teacher_name}</TableCell>
+                <TableCell>{row.room}</TableCell>
+                <TableCell>{row.day}</TableCell>
+                <TableCell>
+                  {row.start_time} - {row.end_time}
+                </TableCell>
+                <TableCell>
+                  <FaEye
+                    onClick={() => {
+                      window.location.href = `/class/${row.id}`;
+                    }}
+                    className="text-blue-500 cursor-pointer"
+                  />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Layout>
   );
 };

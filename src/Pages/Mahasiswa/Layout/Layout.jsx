@@ -23,7 +23,7 @@ export function Layout({ children }) {
         <SideBar />
         <TopNavigation />
       </div>
-      <div className="sm:pl-32 pl-20 sm:pr-24 pr-4 pt-8">{children}</div>
+      <div className="sm:pl-32 pl-20 sm:pr-24 pr-4 py-8">{children}</div>
     </main>
   );
 }

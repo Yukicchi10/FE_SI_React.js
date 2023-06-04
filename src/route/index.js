@@ -9,10 +9,11 @@ import {
   MataKuliah,
   MateriMahasiswa,
   ProfilMahasiswa,
+  StudentClassDetail,
 } from "./../Pages/Mahasiswa";
 import Home from "./../Pages/HomePage/Home/Home";
 import AboutUs from "./../Pages/HomePage/AboutUs/AboutUs";
-import { DashboardDosenPage, ProfilDosen } from "./../Pages/Dosen";
+import { DashboardDosenPage, DosenClassDetail, ProfilDosen } from "./../Pages/Dosen";
 import TugasMahasiswa from "./../Pages/Mahasiswa/TugasMahasiswa";
 
 export function RoutePage() {    
@@ -34,10 +35,12 @@ export function RoutePage() {
 
       {/* Dosen Session */}
       <Route path="/lecturer/dashboard" element={<DashboardDosenPage />} />
+      <Route path="/lecturer/class/:id" element={<DosenClassDetail />} />
       <Route path="/lecturer/profil" element={<ProfilDosen />} /> 
 
       {/* Mahasiswa Session */}
       <Route path="/dashboard" element={<DashboardStudent />} />
+      <Route path="/class/:id" element={<StudentClassDetail />} />
       <Route path="/mahasiswa/absen" element={<AbsenMahasiswa />} />
       <Route path="/mahasiswa/profil" element={<ProfilMahasiswa />} />
       <Route

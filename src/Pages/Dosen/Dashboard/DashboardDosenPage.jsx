@@ -3,6 +3,7 @@ import { Layout } from "../Layout/Layout";
 import apiDosenProfil from "../../../lib/api/dosen/profil";
 import apiDosenClass from "../../../lib/api/dosen/class";
 import { Grid } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export function DashboardDosenPage() {
   const [user, setUser] = useState({});
@@ -28,9 +29,10 @@ export function DashboardDosenPage() {
               <div className="p-2 text-center font-bold text-white bg-yellow-500">
                 {row.nama_mapel} ({row.sks} SKS)
               </div>
-              <div class="px-6 py-3">
+              <Link to={`/lecturer/class/${row.id}`}>
+              <div class="px-6 py-3 hover:bg-gray-50 cursor-pointer">
                 <div>{row.teacher_name}</div>
-                <div className="bg-gray-50 p-2 rounded">
+                <div className="bg-gray-100  p-2 rounded">
                   {" "}
                   <div class="text-gray-700 text-base">
                     {row.day} | {row.start_time.toString()} -{" "}
@@ -40,6 +42,7 @@ export function DashboardDosenPage() {
                   <div class="text-gray-700 text-base">{row.class_name}</div>
                 </div>
               </div>
+              </Link>
             </div>
           </Grid>
         ))}
