@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 import apiDosenClass from "../../../lib/api/dosen/class";
 import { FiExternalLink } from "react-icons/fi";
 
-export function MateriDosenPage() {
+export function DosenTugas() {
   const [data, setData] = useState();
 
   useEffect(() => {
     const getData = async () => {
-      await apiDosenClass.listMateri().then((res) => setData(res.data.data));
+      await apiDosenClass.listTugas().then((res) => setData(res.data.data));
     };
     getData();
   }, []);
@@ -23,21 +23,21 @@ export function MateriDosenPage() {
       {data?.map((row) => (
         <div className="w-full mt-4  rounded overflow-hidden shadow-lg">
           <div className="p-2 font-bold text-white bg-yellow-500">
-            {row.judul}
+            {row.title}
           </div>
           <div className="flex justify-between items-center px-6">
             <div className="py-4">
-              <div className="text-lg">{row.deskripsi}</div>
-              <div className="text-gray-500">{row.nama_mapel}</div>
+              <div className="text-lg">{row.description}</div>
+              {/* <div className="text-gray-500">{row.title}</div> */}
             </div>
 
-            <Link
+            {/* <Link
               to={row.file}
               target="_blank"
               className="no-underline  px-3 py-1 text-sm font-semibold text-gray-700 cursor-pointer"
             >
               <FiExternalLink className="text-xl" />
-            </Link>
+            </Link> */}
           </div>
         </div>
       ))}

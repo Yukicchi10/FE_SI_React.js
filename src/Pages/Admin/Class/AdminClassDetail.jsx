@@ -74,13 +74,14 @@ export function AdminClassDetail() {
 
   return (
     <Layout>
-      <div class="relative bg-gradient-to-r from-blue-200 to-blue-400 text-blue-800 shadow-lg rounded-lg p-6">
+      <div class="bg-gradient-to-r from-blue-200 to-blue-400 text-blue-800 shadow-lg rounded-lg p-6 z-10">
         <h6 class="text-2xl font-semibold mb-3"> {data?.nama_kelas}</h6>
         <p class="text-lg"> {data?.angkatan}</p>
-
-        <div className="absolute top-0 right-0">
+      </div>
+      <div className="flex mt-2 items-center" >
+        <div className="">
           <IconButton onClick={handleClick} color="white">
-            <FiMenu className="text-white" />
+            <FiMenu className="" />
           </IconButton>
           <Menu
             anchorEl={anchorEl}
@@ -105,11 +106,11 @@ export function AdminClassDetail() {
             </MenuItem>
           </Menu>
         </div>
+        <Tabs value={value} onChange={handleChange}>
+          <Tab label="Mahasiswa" />
+          <Tab label="Mata Kuliah" />
+        </Tabs>
       </div>
-      <Tabs value={value} onChange={handleChange}>
-        <Tab label="Mahasiswa" />
-        <Tab label="Mata Kuliah" />
-      </Tabs>
       <TabPanel value={value} index={0}>
         <TableContainer component={Paper} className="mt-4">
           <Table>
@@ -161,48 +162,53 @@ export function AdminClassDetail() {
         </TableContainer>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Grid container columnSpacing={2} rowSpacing={2} className="mt-2">
-          {data?.mapel.map((row) => (
-            <Grid item xl={2} lg={3} md={4} sm={6} xs={12}>
-              <div class="max-w-sm rounded overflow-hidden shadow-lg">
-                <div class="px-6 py-4">
-                  <div class="font-bold text-xl">{row.nama_mapel}</div>
-                  <div>{row.sks} SKS</div> 
-                  <div className="text-sm font-bold">Dosen:</div>
-                  <div>{row.teacher_name}</div>
-                  <div className="bg-gray-50 p-2 rounded">
-                    {" "}
-                    <div class="text-gray-700 text-base">
-                      {row.day} | {row.start_time.toString()} -{" "}
-                      {row.end_time.toString()}
+        <TableContainer component={Paper} className="mt-4">
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell className="!font-bold">Mata Kuliah</TableCell>
+                <TableCell className="!font-bold">SKS</TableCell>
+                <TableCell className="!font-bold">Dosen</TableCell>
+                <TableCell className="!font-bold">Ruang</TableCell>
+                <TableCell className="!font-bold">Hari</TableCell>
+                <TableCell className="!font-bold">Waktu</TableCell>
+                <TableCell className="!font-bold">Aksi</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data?.mapel.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell>{row.nama_mapel}</TableCell>
+                  <TableCell>{row.sks}</TableCell>
+                  <TableCell>{row.teacher_name}</TableCell>
+                  <TableCell>{row.room}</TableCell>
+                  <TableCell>{row.day}</TableCell>
+                  <TableCell>
+                    {row.start_time.toString()} - {row.end_time.toString()}
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex gap-3 items-center">
+                      <FaPencilAlt
+                        onClick={() => {
+                          setSelectedData(row);
+                          setOpenEditMapel(true);
+                        }}
+                        className="text-green-500 cursor-pointer"
+                      />{" "}
+                      <FaTrashAlt
+                        onClick={() => {
+                          setSelectedData(row);
+                          setOpenDeleteMapel(true);
+                        }}
+                        className="text-red-500 cursor-pointer"
+                      />{" "}
                     </div>
-                    <div class="text-gray-700 text-base">{row.room}</div>
-                  </div>
-                </div>
-                <div class="flex gap-2 justify-center px-6 pb-4">
-                  <span
-                    onClick={() => {
-                      setSelectedData(row);
-                      setOpenEditMapel(true);
-                    }}
-                    class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 cursor-pointer"
-                  >
-                    Edit
-                  </span>
-                  <span
-                    onClick={() => {
-                      setSelectedData(row);
-                      setOpenDeleteMapel(true);
-                    }}
-                    class="inline-block bg-red-500 rounded-full px-3 py-1 text-sm font-semibold text-white cursor-pointer"
-                  >
-                    Hapus
-                  </span>
-                </div>
-              </div>
-            </Grid>
-          ))}
-        </Grid>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </TabPanel>
       <StudentForm
         method="add"

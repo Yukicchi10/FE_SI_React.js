@@ -4,6 +4,9 @@ import apiDosenProfil from "../../../lib/api/dosen/profil";
 import apiDosenClass from "../../../lib/api/dosen/class";
 import { Grid } from "@mui/material";
 import { Link } from "react-router-dom";
+import { BiTime } from "react-icons/bi";
+import { FaChalkboardTeacher } from "react-icons/fa";
+import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
 
 export function DashboardDosenPage() {
   const [user, setUser] = useState({});
@@ -33,22 +36,35 @@ export function DashboardDosenPage() {
               <div className="p-2 text-center font-bold text-white bg-yellow-500">
                 {row.nama_mapel} ({row.sks} SKS)
               </div>
-              <div onClick={() => handleLink(row.id)}>
-                <div class="px-6 py-3 hover:bg-gray-50 cursor-pointer">
-                  <div>{row.teacher_name}</div>
-                  <div className="bg-gray-100  p-2 rounded">
+              <div className="p-4 w-full">
+                <div className="bg-gray-100 p-2 rounded">
+                  <div className="flex  gap-2 items-center">
+                  <HiOutlineBuildingOffice2 />{" "}
+                  <div className="text-gray-700 text-base ">{row.room}</div>
+                </div>
+                <div className="flex gap-2 items-center">
+                  <BiTime />{" "}
+                  <div className="text-gray-700 text-base ">
                     {" "}
-                    <div class="text-gray-700 text-base">
-                      {row.day} | {row.start_time.toString()} -{" "}
-                      {row.end_time.toString()}
-                    </div>
-                    <div class="text-gray-700 text-base !no-underline">
-                      {row.room}
-                    </div>
-                    <div class="text-gray-700 text-base !no-underline">
-                      {row.class_name}
-                    </div>
+                    {row.day} | {row.start_time.toString()} -{" "}
+                    {row.end_time.toString()}
                   </div>
+                </div>{" "}
+                <div className="flex gap-2 items-center">
+                  <FaChalkboardTeacher />{" "}
+                  <div className="text-gray-700 text-base ">
+                    {row.class_name}
+                  </div>
+                </div>
+                </div>
+                
+                <div className="flex w-full">
+                  <Link
+                    to={`/lecturer/class/${row.id}`}
+                    className="cursor-pointer w-full no-underline mt-2 text-center bg-yellow-600 text-white px-4 py-1 rounded"
+                  >
+                    Buka
+                  </Link>
                 </div>
               </div>
             </div>

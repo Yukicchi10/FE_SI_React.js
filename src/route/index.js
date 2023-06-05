@@ -10,11 +10,11 @@ import {
   MateriMahasiswa,
   ProfilMahasiswa,
   StudentClassDetail,
+  TugasMahasiswa
 } from "./../Pages/Mahasiswa";
 import Home from "./../Pages/HomePage/Home/Home";
 import AboutUs from "./../Pages/HomePage/AboutUs/AboutUs";
-import { DashboardDosenPage, DosenClassDetail, MataKuliahDosen, MateriDosenPage, ProfilDosen } from "./../Pages/Dosen";
-import TugasMahasiswa from "./../Pages/Mahasiswa/TugasMahasiswa";
+import { DashboardDosenPage, DosenClassDetail, DosenTugas, MataKuliahDosen, MateriDosenPage, ProfilDosen } from "./../Pages/Dosen";
 
 export function RoutePage() {    
   return (
@@ -34,24 +34,23 @@ export function RoutePage() {
       <Route path="/admin/manage-lecturer" element={<LecturerTable />} />
 
       {/* Dosen Session */}
-      <Route path="/lecturer/dashboard" element={<DashboardDosenPage />} />
-      <Route path="/lecturer/subjects" element={<MataKuliahDosen />} />
-      <Route path="/lecturer/materi" element={<MateriDosenPage />} />
-      <Route path="/lecturer/class/:id" element={<DosenClassDetail />} />
-      <Route path="/lecturer/profil" element={<ProfilDosen />} /> 
+      <Route path="/dosen/dashboard" element={<DashboardDosenPage />} />
+      <Route path="/dosen/materi" element={<MateriDosenPage />} />
+      <Route path="/dosen/tugas" element={<DosenTugas />} />
+      <Route path="/dosen/class/:id" element={<DosenClassDetail />} />
+      <Route path="/dosen/profil" element={<ProfilDosen />} /> 
 
       {/* Mahasiswa Session */}
       <Route path="/dashboard" element={<DashboardStudent />} />
-      <Route path="/class/:id" element={<StudentClassDetail />} />
+      <Route path="/materi" element={<MateriMahasiswa />} />
+      <Route path="/tugas" element={<TugasMahasiswa />} />
+      <Route path="/kelas/:id" element={<StudentClassDetail />} />
       <Route path="/mahasiswa/absen" element={<AbsenMahasiswa />} />
-      <Route path="/mahasiswa/profil" element={<ProfilMahasiswa />} />
+      <Route path="/profil" element={<ProfilMahasiswa />} />
       <Route
         path="/mahasiswa/kalender-akademik"
         element={<KalenderAkademik />}
       />
-      <Route path="/mahasiswa/mata-kuliah" element={<MataKuliah />} />
-      <Route path="/mahasiswa/materi-mahasiswa" element={<MateriMahasiswa />} />
-      <Route path="/mahasiswa/tugas-mahasiswa" element={<TugasMahasiswa />} />
     </Routes>
   );
 }

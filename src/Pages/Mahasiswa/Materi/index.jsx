@@ -18,7 +18,7 @@ export const MateriMahasiswa = () => {
 
   return (
     <Layout>
-      <div class="relative border-t-8 border-cyan-800 mt-4 items-center bg-gradient-to-r from-cyan-200 to-cyan-400 text-cyan-800 shadow-lg rounded-lg p-3">
+      <div class="border-t-8 border-cyan-800 mt-4 items-center bg-gradient-to-r from-cyan-200 to-cyan-400 text-cyan-800 shadow-lg rounded-lg p-3">
         <h6 class="text-2xl font-semibold"> Materi</h6>
       </div>
       {data?.map((row) => (

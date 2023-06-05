@@ -23,7 +23,7 @@ export function MataKuliahDosen() {
 
   return (
     <Layout>
-      <div class="relative border-l-8 border-yellow-800 items-center bg-gradient-to-r from-yellow-200 to-yellow-400 text-yellow-800 shadow-lg rounded-lg p-3">
+      <div class="border-l-8 border-yellow-800 items-center bg-gradient-to-r from-yellow-200 to-yellow-400 text-yellow-800 shadow-lg rounded-lg p-3">
         <h6 class="text-2xl font-semibold"> Mata Kuliah</h6>
       </div>
       <Grid container columnSpacing={2} rowSpacing={2} className="mt-2">

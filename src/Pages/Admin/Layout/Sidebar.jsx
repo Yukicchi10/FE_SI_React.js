@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 import { MdGroup, MdOutlineSchool } from "react-icons/md";
 import logoSI from "../../../Img/LogoSI1.png";
+import { Link } from "react-router-dom";
 
 export const SideBarAdmin = () => {
   return (
@@ -21,24 +22,19 @@ export const SideBarAdmin = () => {
       <SideBarIcon
         icon={<FaHome size="28" />}
         text="Dashboard"
-        url="/mahasiswa/dashboard"
-      />
-      <SideBarIcon
-        icon={<MdGroup size="25" />}
-        text="Dosen Pengajar"
-        url="/admin/manage-lecturer"
+        url="/admin/dashboard"
       />
       <SideBarIcon
         icon={<MdOutlineSchool size="25" />}
         text="Kelas"
         url="/admin/class"
       />
-      <Divider />
       <SideBarIcon
-        icon={<FaCalendar size="25" />}
-        text="Absensi"
-        url="/mahasiswa/absen"
+        icon={<MdGroup size="25" />}
+        text="Dosen"
+        url="/admin/manage-lecturer"
       />
+      {/* <Divider />
       <SideBarIcon
         icon={<FaChalkboardTeacher size="25" />}
         text="Mata Kuliah"
@@ -46,27 +42,21 @@ export const SideBarAdmin = () => {
       />
       <Divider />
       <SideBarIcon
-        icon={<FaBook size="25" />}
-        text="Materi"
-        url="/mahasiswa/materi-mahasiswa"
-      />
-      <Divider />
-      <SideBarIcon
         icon={<FaCalendarAlt size="25" />}
         text="Kalender Akademik"
         url="/mahasiswa/kalender-akademik"
-      />
+      /> */}
     </div>
   );
 };
 
 const SideBarIcon = ({ icon, text = "tooltip 💡", url = "#" }) => (
-  <a href={url} className="sidebar-icon group">
+  <Link to={url} className="sidebar-icon group">
     {/* // <div className="sidebar-icon group"> */}
     {icon}
-    <span class="sidebar-tooltip group-hover:scale-100">{text}</span>
+    <span class="sidebar-tooltip group-hover:scale-100 !z-50">{text}</span>
     {/* </div> */}
-  </a>
+  </Link>
 );
 
 const Divider = () => <div className="sidebar-hr" />;
