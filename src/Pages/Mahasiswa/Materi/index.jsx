@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Layout } from "../Layout/Layout";
 import apiMahasiswaClass from "../../../lib/api/mahasiswa/class";
 import { Link } from "react-router-dom";
+import { FiExternalLink } from "react-icons/fi";
 
 export const MateriMahasiswa = () => {
   const [data, setData] = useState();
@@ -29,12 +30,12 @@ export const MateriMahasiswa = () => {
             </div>
 
             <Link
-              to={row.file}
-              target="_blank"
-              className="no-underline  bg-gray-200 hover:text-blue-700 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 cursor-pointer"
-            >
-              Lihat Materi
-            </Link>
+                  to={row.file}
+                  target="_blank"
+                  className="inline-block no-underline  rounded-full px-3 py-1 text-sm font-semibold text-gray-700 cursor-pointer"
+                >
+                  <FiExternalLink className="text-xl" />
+                </Link>
           </div>
         </div>
       ))}

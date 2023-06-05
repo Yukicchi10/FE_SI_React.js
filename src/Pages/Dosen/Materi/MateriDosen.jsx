@@ -3,6 +3,7 @@ import { Layout } from "../Layout/Layout";
 import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import apiDosenClass from "../../../lib/api/dosen/class";
+import { FiExternalLink } from "react-icons/fi";
 
 export function MateriDosenPage() {
   const [data, setData] = useState();
@@ -33,9 +34,9 @@ export function MateriDosenPage() {
             <Link
               to={row.file}
               target="_blank"
-              className="no-underline  bg-gray-200 hover:text-yellow-700 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 cursor-pointer"
+              className="no-underline  px-3 py-1 text-sm font-semibold text-gray-700 cursor-pointer"
             >
-              Lihat Materi
+              <FiExternalLink className="text-xl" />
             </Link>
           </div>
         </div>

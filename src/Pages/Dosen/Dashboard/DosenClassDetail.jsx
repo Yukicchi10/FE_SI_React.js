@@ -20,12 +20,10 @@ import {
 import { FiMenu } from "react-icons/fi";
 import { Link, useParams } from "react-router-dom";
 import { ModalDelete } from "../../../Component/Modal";
-import { StudentForm } from "./StudentForm";
-import apiManageClass from "../../../lib/api/admin/manageClass";
-import apiManageStudent from "../../../lib/api/admin/manageStudent";
 import apiManageSubject from "../../../lib/api/admin/manageSubject";
 import { MateriForm, SubjectForm } from "./MateriForm";
 import apiDosenClass from "../../../lib/api/dosen/class";
+import { TugasForm } from "./TugasForm";
 
 export function DosenClassDetail() {
   const [data, setData] = useState();
@@ -79,12 +77,15 @@ export function DosenClassDetail() {
     <Layout>
       <Tabs value={value} onChange={handleChange}>
         <Tab label="Materi" />
-        <Tab label="Mahasiswa" />
+        <Tab label="Tugas" />
       </Tabs>
 
       <TabPanel value={value} index={0}>
         <Grid container columnSpacing={2} rowSpacing={2} className="mt-2">
-          <button className="bg-yellow-400 mt-4 text-white flex p-2 rounded" onClick={() => setOpenFormMateri(true)}>
+          <button
+            className="bg-yellow-400 mt-4 text-white flex p-2 rounded"
+            onClick={() => setOpenFormMateri(true)}
+          >
             Tambah Materi
           </button>
           {data?.materi.map((row) => (
@@ -92,17 +93,6 @@ export function DosenClassDetail() {
               <div className="px-6 py-4">
                 <div className="font-bold text-xl">{row.judul}</div>
                 <div>{row.deskripsi}</div>
-                {/* <div>{row.sks} SKS</div> 
-                  <div className="text-sm font-bold">Dosen:</div>
-                  <div>{row.teacher_name}</div>
-                  <div className="bg-gray-50 p-2 rounded">
-                    {" "}
-                    <div className="text-gray-700 text-base">
-                      {row.day} | {row.start_time.toString()} -{" "}
-                      {row.end_time.toString()}
-                    </div>
-                    <div className="text-gray-700 text-base">{row.room}</div>
-                  </div> */}
               </div>
               <div className="flex gap-2 px-6 pb-4">
                 <Link
@@ -112,15 +102,6 @@ export function DosenClassDetail() {
                 >
                   Lihat
                 </Link>
-                {/* <span
-                  onClick={() => {
-                    setSelectedData(row);
-                    setOpenEditMapel(true);
-                  }}
-                  className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 cursor-pointer"
-                >
-                  Edit
-                </span> */}
                 <span
                   onClick={() => {
                     setSelectedData(row);
@@ -136,56 +117,44 @@ export function DosenClassDetail() {
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <TableContainer component={Paper} className="mt-4">
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell className="!font-bold">NIM</TableCell>
-                <TableCell className="!font-bold">Nama</TableCell>
-                <TableCell className="!font-bold">Alamat</TableCell>
-                <TableCell className="!font-bold">Telepon</TableCell>
-                <TableCell className="!font-bold">Action</TableCell>
-              </TableRow>
-            </TableHead>
-            {/* <TableBody>
-              {data?.mahasiswa.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.nim}</TableCell>
-                  <TableCell>{row.nama}</TableCell>
-                  <TableCell>{row.alamat}</TableCell>
-                  <TableCell>{row.telepon}</TableCell>
-                  <TableCell>
-                    <div className="flex gap-3 items-center">
-                      <FaEye
-                        onClick={() => {
-                          setSelectedData(row);
-                          setOpenView(true);
-                        }}
-                        className="text-blue-500 cursor-pointer"
-                      />
-                      <FaPencilAlt
-                        onClick={() => {
-                          setSelectedData(row);
-                          setOpenEdit(true);
-                        }}
-                        className="text-green-500 cursor-pointer"
-                      />{" "}
-                      <FaTrashAlt
-                        onClick={() => {
-                          setSelectedData(row);
-                          setOpenDelete(true);
-                        }}
-                        className="text-red-500 cursor-pointer"
-                      />{" "}
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody> */}
-          </Table>
-        </TableContainer>
+        <Grid container columnSpacing={2} rowSpacing={2} className="mt-2">
+          <button
+            className="bg-yellow-400 mt-4 text-white flex p-2 rounded"
+            onClick={() => setOpenForm(true)}
+          >
+            Tambah Tugas
+          </button>
+          {data?.tugas.map((row) => (
+            <div className="w-full mt-4 border-l-yellow-500 border-l-8 rounded overflow-hidden shadow-lg">
+              <div className="px-6 py-4">
+                <div className="font-bold text-xl">{row.title}</div>
+                <div>{row.description}</div>
+              </div>
+              <div className="flex gap-2 px-6 pb-4">
+                <span
+                  onClick={() => {
+                    setSelectedData(row);
+                    setOpenEdit(true);
+                  }}
+                  class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 cursor-pointer"
+                >
+                  Edit
+                </span>
+                <span
+                  onClick={() => {
+                    setSelectedData(row);
+                    setOpenDelete(true);
+                  }}
+                  className="inline-block bg-red-500 rounded-full px-3 py-1 text-sm font-semibold text-white cursor-pointer"
+                >
+                  Hapus
+                </span>
+              </div>
+            </div>
+          ))}
+        </Grid>
       </TabPanel>
-      <StudentForm
+      <TugasForm
         method="add"
         open={openForm}
         onClose={() => setOpenForm(false)}
@@ -194,13 +163,7 @@ export function DosenClassDetail() {
           setOpenForm(false);
         }}
       />
-      <StudentForm
-        method="view"
-        open={openView}
-        initialValue={selectedData}
-        onClose={() => setOpenView(false)}
-      />
-      <StudentForm
+      <TugasForm
         method="edit"
         open={openEdit}
         initialValue={selectedData}

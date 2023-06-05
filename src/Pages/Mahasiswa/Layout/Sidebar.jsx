@@ -9,8 +9,8 @@ const SideBar = () => {
         <Divider/>
         <SideBarIcon icon={<FaHome size="28"/>} text="Dashboard" url='/dashboard' />
         <Divider />
-        <SideBarIcon icon={<FaCalendar size="25" />} text="Absensi" url='/mahasiswa/absen' />
         <SideBarIcon icon={<FaChalkboardTeacher size="25" />} text="Mata Kuliah" url='/mahasiswa/mata-kuliah' />
+        <SideBarIcon icon={<FaCalendar size="25" />} text="Absensi" url='/mahasiswa/absen' />
         <Divider/>
         <SideBarIcon icon={<FaBook size="25" />} text="Materi" url='/mahasiswa/materi-mahasiswa' />
         <SideBarIcon icon={<FaTasks size="25" />} text="Tugas" url='/mahasiswa/tugas-mahasiswa' />
