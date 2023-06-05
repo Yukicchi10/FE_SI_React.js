@@ -79,7 +79,7 @@ export function AdminClassDetail() {
         <p class="text-lg"> {data?.angkatan}</p>
       </div>
       <div className="flex mt-2 items-center" >
-        <div className="">
+        <div>
           <IconButton onClick={handleClick} color="white">
             <FiMenu className="" />
           </IconButton>

@@ -2,13 +2,11 @@ import React from 'react'
 import NavBarHome from '../../Component/NavBarHome/NavBarHome'
 import {
   MDBContainer,
-  MDBCardImage,
   MDBRow,
   MDBCol,
 }
 from 'mdb-react-ui-kit';
 import {useEffect, useState} from "react";
-import { Button } from 'react-bootstrap';
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 
@@ -23,7 +21,7 @@ export const LoginDosen = () => {
 
   useEffect(() => {
     if(localStorage.getItem('token') && localStorage.getItem("role") === "dosen"){
-      navigate('/lecturer/dashboard');
+      navigate('/dosen/dashboard');
     }
   },[]);
 
@@ -40,7 +38,7 @@ export const LoginDosen = () => {
 
       localStorage.setItem('token',response.data.access_token);
       localStorage.setItem('role',response.data.role);
-      window.location.href = "/lecturer/dashboard"
+      window.location.href = "/dosen/dashboard"
 
     }).catch((error) => {
       console.log(error.response.data);
