@@ -9,6 +9,11 @@
   padding: 0;
 }
 
+a{
+  text-decoration-line: none;
+
+}
+
 @layer components {
   .sidebar-icon {
     @apply relative flex items-center justify-center 

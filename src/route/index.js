@@ -13,7 +13,7 @@ import {
 } from "./../Pages/Mahasiswa";
 import Home from "./../Pages/HomePage/Home/Home";
 import AboutUs from "./../Pages/HomePage/AboutUs/AboutUs";
-import { DashboardDosenPage, DosenClassDetail, ProfilDosen } from "./../Pages/Dosen";
+import { DashboardDosenPage, DosenClassDetail, MataKuliahDosen, MateriDosenPage, ProfilDosen } from "./../Pages/Dosen";
 import TugasMahasiswa from "./../Pages/Mahasiswa/TugasMahasiswa";
 
 export function RoutePage() {    
@@ -35,6 +35,8 @@ export function RoutePage() {
 
       {/* Dosen Session */}
       <Route path="/lecturer/dashboard" element={<DashboardDosenPage />} />
+      <Route path="/lecturer/subjects" element={<MataKuliahDosen />} />
+      <Route path="/lecturer/materi" element={<MateriDosenPage />} />
       <Route path="/lecturer/class/:id" element={<DosenClassDetail />} />
       <Route path="/lecturer/profil" element={<ProfilDosen />} /> 
 

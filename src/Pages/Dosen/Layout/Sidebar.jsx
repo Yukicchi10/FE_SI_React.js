@@ -8,10 +8,10 @@ const SideBarDosen = () => {
                     
         <SideBarIcon icon={<FaHome size="28"/>} text="Dashboard" url='/lecturer/dashboard' />
         <Divider />
+        <SideBarIcon icon={<FaChalkboardTeacher size="25" />} text="Mata Kuliah" url='/lecturer/subjects' />
         <SideBarIcon icon={<FaCalendar size="25" />} text="Absensi" url='/dosen/absen' />
-        <SideBarIcon icon={<FaChalkboardTeacher size="25" />} text="Mata Kuliah" url='/dosen/mata-kuliah' />
         <Divider/>
-        <SideBarIcon icon={<FaBook size="25" />} text="Materi" url='/dosen/materi' />
+        <SideBarIcon icon={<FaBook size="25" />} text="Materi" url='/lecturer/materi' />
         <SideBarIcon icon={<FaTasks size="25" />} text="Tugas" url='/dosen/materi' />
         <Divider />
         <SideBarIcon icon={<FaCalendarAlt size="25" />} text="Kalender Akademik" url='/dosen/kalender-akademik' />
