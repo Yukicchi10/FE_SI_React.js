@@ -25,6 +25,7 @@ export const MataKuliah = () => {
   }, []);
   return (
     <Layout>
+      <h6 class="text-2xl font-semibold mt-4"> Mata Kuliah</h6>
       <TableContainer component={Paper} className="mt-2">
         <Table>
           <TableHead>

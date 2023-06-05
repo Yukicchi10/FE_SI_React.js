@@ -47,7 +47,7 @@ export function StudentClassDetail() {
 
   return (
     <Layout>
-      <div className="relative bg-gray-900">
+      <div className="relative bg-gray-900 mt-4 rounded">
         <div className="relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="relative sm:py-16">

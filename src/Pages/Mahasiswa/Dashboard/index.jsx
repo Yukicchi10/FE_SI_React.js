@@ -19,6 +19,12 @@ export function DashboardStudent() {
     getData();
   }, []);
 
+
+  const handleLink = (id) => {
+    window.location.href = "/class/" + id;
+  };
+
+
   return (
     <Layout>
       <div className="relative  bg-gradient-to-r from-cyan-200 to-cyan-400 text-cyan-800 shadow-lg rounded-lg p-6">
@@ -31,7 +37,7 @@ export function DashboardStudent() {
               <div className="p-2 text-center font-bold text-white bg-cyan-500">
                 {row.nama_mapel} ({row.sks} SKS)
               </div>
-              <Link to={`/class/${row.id}`}>
+              <div onClick={() => handleLink(row.id)} className="cursor-pointer">
                 <div className="px-6 py-3">
                   <div className="bg-gray-50 p-2 rounded">
                     {" "}
@@ -43,7 +49,7 @@ export function DashboardStudent() {
                     <div className="text-gray-700 text-base">{row.class_name}</div>
                   </div>
                 </div>
-              </Link>
+              </div>
             </div>
           </Grid>
         ))}
