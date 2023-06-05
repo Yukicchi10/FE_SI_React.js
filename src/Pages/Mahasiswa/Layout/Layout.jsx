@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import TopNavigation from "../../../Component/TopNavigation";
+import TopNavigation from "./TopNavigation";
 import SideBar from "./Sidebar";
 
 export function Layout({ children }) {
