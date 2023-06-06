@@ -20,13 +20,9 @@ export function DashboardDosenPage() {
     getData();
   }, []);
 
-  const handleLink = (id) => {
-    window.location.href = "/lecturer/class/" + id;
-  };
-
   return (
     <Layout>
-      <div class="relative bg-gradient-to-r from-yellow-200 to-yellow-400 text-yellow-800 shadow-lg rounded-lg p-6">
+      <div class="bg-gradient-to-r from-yellow-200 to-yellow-400 text-yellow-800 shadow-lg rounded-lg p-6">
         <h6 class="text-2xl font-semibold mb-3"> Selamat Datang {user.nama}</h6>
       </div>
       <Grid container columnSpacing={2} rowSpacing={2} className="mt-2">

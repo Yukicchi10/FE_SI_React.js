@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import SideBar from "./Sidebar";
 import TopNavigation from "../../../Component/TopNavigation";
+import { TopBar } from "./TopBar";
 
 export function Layout({ children }) {
   const isAuthenticated = localStorage.getItem("token");
@@ -21,7 +22,7 @@ export function Layout({ children }) {
     <main>
       <div className="flex">
         <SideBar />
-        <TopNavigation />
+        <TopBar />
       </div>
       <div className="sm:pl-32 pl-20 sm:pr-24 pr-4 py-8">{children}</div>
     </main>
