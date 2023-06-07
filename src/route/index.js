@@ -1,22 +1,34 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { LoginAdmin, LoginDosen, LoginMahasiswa } from "./../Pages/Auth";
-import { AdminClass, AdminClassDetail, DashboardAdminPage, LecturerTable } from "./../Pages/Admin";
+import {
+  AdminClass,
+  AdminClassDetail,
+  DashboardAdminPage,
+  LecturerTable,
+} from "./../Pages/Admin";
 import {
   AbsenMahasiswa,
   DashboardStudent,
+  DetailTugas,
   KalenderAkademik,
-  MataKuliah,
   MateriMahasiswa,
   ProfilMahasiswa,
   StudentClassDetail,
-  TugasMahasiswa
+  TugasMahasiswa,
 } from "./../Pages/Mahasiswa";
 import Home from "./../Pages/HomePage/Home/Home";
 import AboutUs from "./../Pages/HomePage/AboutUs/AboutUs";
-import { DashboardDosenPage, DosenClassDetail, DosenTugas, MataKuliahDosen, MateriDosenPage, ProfilDosen } from "./../Pages/Dosen";
+import {
+  DashboardDosenPage,
+  DosenClassDetail,
+  DosenTugas,
+  TugasDetail,
+  MateriDosenPage,
+  ProfilDosen,
+} from "./../Pages/Dosen";
 
-export function RoutePage() {    
+export function RoutePage() {
   return (
     <Routes>
       {/* Home Session */}
@@ -35,16 +47,18 @@ export function RoutePage() {
 
       {/* Dosen Session */}
       <Route path="/dosen/dashboard" element={<DashboardDosenPage />} />
+      <Route path="/dosen/class/:id" element={<DosenClassDetail />} />
       <Route path="/dosen/materi" element={<MateriDosenPage />} />
       <Route path="/dosen/tugas" element={<DosenTugas />} />
-      <Route path="/dosen/class/:id" element={<DosenClassDetail />} />
-      <Route path="/dosen/profil" element={<ProfilDosen />} /> 
+      <Route path="/dosen/tugas/:id" element={<TugasDetail />} />
+      <Route path="/dosen/profil" element={<ProfilDosen />} />
 
       {/* Mahasiswa Session */}
       <Route path="/dashboard" element={<DashboardStudent />} />
+      <Route path="/kelas/:id" element={<StudentClassDetail />} />
       <Route path="/materi" element={<MateriMahasiswa />} />
       <Route path="/tugas" element={<TugasMahasiswa />} />
-      <Route path="/kelas/:id" element={<StudentClassDetail />} />
+      <Route path="/tugas/:id" element={<DetailTugas />} />
       <Route path="/mahasiswa/absen" element={<AbsenMahasiswa />} />
       <Route path="/profil" element={<ProfilMahasiswa />} />
       <Route

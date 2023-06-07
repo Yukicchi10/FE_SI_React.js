@@ -8,9 +8,7 @@ import {
   PDFFileUploader,
 } from "../../../Component/Input";
 import { Controller, useForm } from "react-hook-form";
-import { DAY_OPTIONS } from "../../../lib/constant";
 import { useParams } from "react-router-dom";
-import apiManageLecturer from "../../../lib/api/admin/manageLecture";
 import apiManageSubject from "../../../lib/api/admin/manageSubject";
 import apiDosenClass from "../../../lib/api/dosen/class";
 
@@ -27,7 +25,6 @@ const INITIAL = {
 export function MateriForm({ open, onClose, method, initialValue, onSuccess }) {
   const { id } = useParams();
   const [initialBody, setInitialBody] = useState(INITIAL);
-  const [lecturerOptions, setLecturerOptions] = useState([]);
   const [attachment, setAttachment] = useState();
 
   const { control, handleSubmit, reset } = useForm({

@@ -60,7 +60,6 @@ export function TopBar() {
               </MenuItem>
             </Menu>
           </div>
-          {/* <FiLogOut size={24} className="cursor-pointer" onClick={() => setOpen(true)} /> */}
         </div>
       </nav>
       <ModalLogout open={open} onClose={() => setOpen(false)} />

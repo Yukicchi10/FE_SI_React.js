@@ -32,8 +32,8 @@ const TopBar = () => {
       <nav className="w-full pl-12 bg-gray-300 py-2">
         <div className="container mx-auto flex items-center justify-between">
           <img src={LogoSI} alt="logo" className="w-48" />
-          <div className="mr-4">
-            {user.nama}
+          <div className="flex fap-2 items-center mr-4">
+            <span className="hidden sm:flex">{user.nama}</span>
             <IconButton onClick={handleClick} color="white">
               <FaUserCircle size="25" />
             </IconButton>

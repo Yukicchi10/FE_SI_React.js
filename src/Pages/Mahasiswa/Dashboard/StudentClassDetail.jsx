@@ -65,8 +65,8 @@ export function StudentClassDetail() {
       </Tabs>
       <TabPanel value={value} index={0}>
         <Grid container columnSpacing={2} rowSpacing={2} className="mt-2">
-          {data?.materi.map((row) => (
-            <div className="md:w-1/2 w-full px-2" key={row.id}>
+          {data?.materi?.map((row) => (
+            <div className="w-full px-2" key={row.id}>
               <div className="flex justify-between items-center mt-4 border-l-cyan-500 border-l-8 rounded overflow-hidden shadow-lg">
                 <div className="px-6 py-4">
                   <div className="font-bold text-xl">{row.judul}</div>
@@ -83,6 +83,26 @@ export function StudentClassDetail() {
             </div>
           ))}
         </Grid>
+      </TabPanel>
+
+      <TabPanel value={value} index={1}>
+        {data?.tugas?.map((row) => (
+          <div className="w-full mt-4 border-l-8 border-cyan-500 rounded overflow-hidden shadow-lg">
+            <div className="flex justify-between items-center px-6">
+              <div className="py-4">
+                <div className="font-bold text-xl">{row.title}</div>
+                <div className="text-gray-500">{row.description}</div>
+              </div>
+
+              <Link
+                to={`/tugas/${row.id}`}
+                className="inline-block no-underline  rounded-full px-3 py-1 text-sm font-semibold text-gray-700 cursor-pointer"
+              >
+                <FiExternalLink className="text-xl" />
+              </Link>
+            </div>
+          </div>
+        ))}
       </TabPanel>
     </Layout>
   );

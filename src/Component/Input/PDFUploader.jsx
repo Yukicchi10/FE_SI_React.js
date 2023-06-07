@@ -22,6 +22,7 @@ export const PDFFileUploader = ({
     setFiles(null);
     onRemove();
   };
+  
   return (
     <Box>
       <Typography sx={{ my: "auto" }} color="textSecondary">

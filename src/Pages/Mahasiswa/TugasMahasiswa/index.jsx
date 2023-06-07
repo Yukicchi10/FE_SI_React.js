@@ -27,13 +27,12 @@ export const TugasMahasiswa = () => {
               <div className="text-gray-500">{row.description}</div>
             </div>
 
-            {/* <Link
-              to={row.file}
-              target="_blank"
+            <Link
+              to={`/tugas/${row.id}`}
               className="inline-block no-underline  rounded-full px-3 py-1 text-sm font-semibold text-gray-700 cursor-pointer"
             >
               <FiExternalLink className="text-xl" />
-            </Link> */}
+            </Link>
           </div>
         </div>
       ))}

@@ -56,7 +56,7 @@ export function DashboardDosenPage() {
                 
                 <div className="flex w-full">
                   <Link
-                    to={`/lecturer/class/${row.id}`}
+                    to={`/dosen/class/${row.id}`}
                     className="cursor-pointer w-full no-underline mt-2 text-center bg-yellow-600 text-white px-4 py-1 rounded"
                   >
                     Buka

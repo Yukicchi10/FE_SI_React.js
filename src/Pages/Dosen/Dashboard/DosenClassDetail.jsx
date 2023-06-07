@@ -1,27 +1,15 @@
 import { useEffect, useState } from "react";
-import { FaTrashAlt, FaPencilAlt, FaEye } from "react-icons/fa";
 import { Layout } from "../Layout/Layout";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
   Tab,
   Tabs,
   Box,
-  IconButton,
-  Menu,
-  MenuItem,
   Grid,
 } from "@mui/material";
-import { FiMenu } from "react-icons/fi";
 import { Link, useParams } from "react-router-dom";
 import { ModalDelete } from "../../../Component/Modal";
 import apiManageSubject from "../../../lib/api/admin/manageSubject";
-import { MateriForm, SubjectForm } from "./MateriForm";
+import { MateriForm} from "./MateriForm";
 import apiDosenClass from "../../../lib/api/dosen/class";
 import { TugasForm } from "./TugasForm";
 
@@ -33,23 +21,13 @@ export function DosenClassDetail() {
   const [openDeleteMapel, setOpenDeleteMapel] = useState(false);
   const [openForm, setOpenForm] = useState(false);
   const [openFormMateri, setOpenFormMateri] = useState(false);
-  const [openView, setOpenView] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [openEditMapel, setOpenEditMapel] = useState(false);
   const [selectedData, setSelectedData] = useState();
   const [reloadTable, setReloadTable] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
   };
 
   useEffect(() => {
@@ -75,8 +53,8 @@ export function DosenClassDetail() {
 
   return (
     <Layout>
-      <div className="relative bg-gray-900 mt-4 rounded">
-        <div className="relative overflow-hidden">
+      <div className="bg-gray-900 mt-4 rounded">
+        <div className="overflow-hidden">
           <div className="mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex py-8">
               {/* <div className="lg:grid lg:grid-cols-12 lg:gap-8"> */}

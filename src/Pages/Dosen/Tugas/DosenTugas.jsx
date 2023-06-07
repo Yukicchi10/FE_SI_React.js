@@ -18,7 +18,7 @@ export function DosenTugas() {
   return (
     <Layout>
       <div class="border-l-8 border-yellow-800 items-center bg-gradient-to-r from-yellow-200 to-yellow-400 text-yellow-800 shadow-lg rounded-lg p-3">
-        <h6 class="text-2xl font-semibold"> Materi</h6>
+        <h6 class="text-2xl font-semibold"> Tugas</h6>
       </div>
       {data?.map((row) => (
         <div className="w-full mt-4  rounded overflow-hidden shadow-lg">
@@ -27,17 +27,14 @@ export function DosenTugas() {
           </div>
           <div className="flex justify-between items-center px-6">
             <div className="py-4">
-              <div className="text-lg">{row.description}</div>
-              {/* <div className="text-gray-500">{row.title}</div> */}
+              <div className="text-lg mb-2">{row.description}</div>
+              <Link
+                to={`/dosen/tugas/${row.id}`}
+                className="no-underline bg-yellow-800 text-yellow-50 hover:text-yellow-100 rounded px-3 py-2 text-sm font-semibold cursor-pointer"
+              >
+                Lakukan Penilaian
+              </Link>
             </div>
-
-            {/* <Link
-              to={row.file}
-              target="_blank"
-              className="no-underline  px-3 py-1 text-sm font-semibold text-gray-700 cursor-pointer"
-            >
-              <FiExternalLink className="text-xl" />
-            </Link> */}
           </div>
         </div>
       ))}

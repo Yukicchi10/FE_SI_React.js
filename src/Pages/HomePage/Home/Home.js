@@ -15,7 +15,7 @@ function Home() {
       window.location.href = "/admin/dashboard";
       return;
     case "dosen":
-      window.location.href = "/lecturer/dashboard";
+      window.location.href = "/dosen/dashboard";
       return;
     case "mahasiswa":
       window.location.href = "/dashboard";
@@ -33,11 +33,11 @@ function Home() {
         <Row className="h101">
           <Col>
             <div className="d-flex align-items-center mb-3">
-              <img fluid src={LogoSI} width="450px" height="auto"></img>
+              <img fluid src={LogoSI} width="450px" height="auto" alt="logo" />
             </div>
           </Col>
           <Col className="d-flex align-items-center">
-            <img fluid src={Exam} width="620px" height="auto" />
+            <img fluid src={Exam} width="620px" height="auto" alt="logo" />
           </Col>
         </Row>
       </Container>
