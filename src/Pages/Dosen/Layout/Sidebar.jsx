@@ -13,7 +13,7 @@ const SideBarDosen = () => {
         <SideBarIcon icon={<FaBook size="25" />} text="Materi" url='/dosen/materi' />
         <SideBarIcon icon={<FaTasks size="25" />} text="Tugas" url='/dosen/tugas' />
         <Divider />
-        {/* <SideBarIcon icon={<FaCalendarAlt size="25" />} text="Kalender Akademik" url='/dosen/kalender-akademik' /> */}
+        <SideBarIcon icon={<FaCalendarAlt size="25" />} text="Kalender Akademik" url='/dosen/kalender-akademik' />
         <SideBarIcon icon={<FaUserCog size="25" />} text="Profil" url='/dosen/profil' />
     </div>
   );

@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { FaTrashAlt, FaPencilAlt, FaEye } from "react-icons/fa";
 import { Layout } from "../Layout/Layout";
+import apiManageLecturer from "../../../lib/api/admin/manageLecture";
+import { ModalDelete } from "../../../Component/Modal";
+import LecturerForm from "./LecturerForm";
 import {
   Table,
   TableBody,
@@ -11,9 +14,6 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import apiManageLecturer from "../../../lib/api/admin/manageLecture";
-import { ModalDelete } from "../../../Component/Modal";
-import LecturerForm from "./LecturerForm";
 
 export function LecturerTable() {
   const [data, setData] = useState([]);

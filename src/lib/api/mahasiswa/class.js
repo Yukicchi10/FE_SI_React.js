@@ -8,13 +8,16 @@ const listTugas = () => instance.auth.get(`/mahasiswa/tugas`);
 const detailTugas = (id) => instance.auth.get(`/mahasiswa/tugas/${id}`);
 const uploadTugas = (data) => instance.auth.post(`/mahasiswa/tugas/upload`, data);
 
+const calendar = () => instance.auth.get("/mahasiswa/calendar");
+
 const apiMahasiswaClass = {
   subjectList,
   subjectDetail,
   listMateri,
   listTugas,
   detailTugas,
-  uploadTugas
+  uploadTugas,
+  calendar
 };
 
 export default apiMahasiswaClass;

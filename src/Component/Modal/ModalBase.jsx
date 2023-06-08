@@ -13,7 +13,7 @@ export default function Modal({ children, open, onClose }) {
       id="backdrop"
       data-cy="activity-item-delete-button"
       onClick={handleOnBackDropClick}
-      className="bg-black bg-opacity-50 ease-in fixed inset-0 flex items-center justify-center"
+      className="bg-black bg-opacity-50 ease-in fixed inset-0 flex items-center justify-center z-50"
     >
       {children}
     </div>

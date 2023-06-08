@@ -39,13 +39,13 @@ export const SideBarAdmin = () => {
         icon={<FaChalkboardTeacher size="25" />}
         text="Mata Kuliah"
         url="/mahasiswa/mata-kuliah"
-      />
+      /> */}
       <Divider />
       <SideBarIcon
         icon={<FaCalendarAlt size="25" />}
         text="Kalender Akademik"
-        url="/mahasiswa/kalender-akademik"
-      /> */}
+        url="/admin/kalender-akademik"
+      />
     </div>
   );
 };

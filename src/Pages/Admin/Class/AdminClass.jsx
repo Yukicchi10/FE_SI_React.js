@@ -52,24 +52,24 @@ export function AdminClass() {
                   {value.angkatan}
                 </p>
               </div>
-              <div className="flex gap-2 items-center p-1 rounded mt-4">
+              <div className="flex gap-2 bg-white items-center p-1 rounded mt-4">
                 <Link
                   to={`/admin/class/${value.id}`}
-                  className="text-gray-500 bg-blue-200 hover:bg-blue-300 p-1 rounded no-underline w-full text-center"
+                  className="text-blue-500 bg-gray-300 hover:bg-blue-300 p-1 rounded no-underline w-full text-center"
                 >
                   <div>Lihat Kelas</div>
                 </Link>
-                <div className=" border border-blue-200 p-1 rounded">
+                <div className=" border bg-white border-blue-200 p-1 rounded">
                   <FaPencilAlt
                     onClick={() => {
                       setSelectedData(value);
                       setOpenEdit(true);
                     }}
-                    className="text-green-400 cursor-pointer"
+                    className="text-green-500 cursor-pointer"
                   />{" "}
                 </div>
 
-                <div className=" border border-blue-200 p-1 rounded">
+                <div className=" border bg-white border-blue-200 p-1 rounded">
                   <FaTrashAlt
                     onClick={() => {
                       setSelectedData(value);

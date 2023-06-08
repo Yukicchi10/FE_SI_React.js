@@ -4,6 +4,7 @@ import { LoginAdmin, LoginDosen, LoginMahasiswa } from "./../Pages/Auth";
 import {
   AdminClass,
   AdminClassDetail,
+  CalendarAcademic,
   DashboardAdminPage,
   LecturerTable,
 } from "./../Pages/Admin";
@@ -11,7 +12,6 @@ import {
   AbsenMahasiswa,
   DashboardStudent,
   DetailTugas,
-  KalenderAkademik,
   MateriMahasiswa,
   ProfilMahasiswa,
   StudentClassDetail,
@@ -26,7 +26,9 @@ import {
   TugasDetail,
   MateriDosenPage,
   ProfilDosen,
+  CalendarAcademicDosen,
 } from "./../Pages/Dosen";
+import { CalendarAcademicStudent } from "../Pages/Mahasiswa/Calendar/CalendarAcademic";
 
 export function RoutePage() {
   return (
@@ -44,6 +46,7 @@ export function RoutePage() {
       <Route path="/admin/class" element={<AdminClass />} />
       <Route path="/admin/class/:id" element={<AdminClassDetail />} />
       <Route path="/admin/manage-lecturer" element={<LecturerTable />} />
+      <Route path="/admin/kalender-akademik" element={<CalendarAcademic />} />
 
       {/* Dosen Session */}
       <Route path="/dosen/dashboard" element={<DashboardDosenPage />} />
@@ -52,6 +55,7 @@ export function RoutePage() {
       <Route path="/dosen/tugas" element={<DosenTugas />} />
       <Route path="/dosen/tugas/:id" element={<TugasDetail />} />
       <Route path="/dosen/profil" element={<ProfilDosen />} />
+      <Route path="/dosen/kalender-akademik" element={<CalendarAcademicDosen />} />
 
       {/* Mahasiswa Session */}
       <Route path="/dashboard" element={<DashboardStudent />} />
@@ -62,8 +66,8 @@ export function RoutePage() {
       <Route path="/mahasiswa/absen" element={<AbsenMahasiswa />} />
       <Route path="/profil" element={<ProfilMahasiswa />} />
       <Route
-        path="/mahasiswa/kalender-akademik"
-        element={<KalenderAkademik />}
+        path="/kalender-akademik"
+        element={<CalendarAcademicStudent />}
       />
     </Routes>
   );
