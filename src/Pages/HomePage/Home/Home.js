@@ -1,30 +1,68 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import NavBarHome from "../../../Component/NavBarHome/NavBarHome";
 import { Col, Container, Row } from "react-bootstrap";
 import Exam from "../../../Img/exam.png";
 import LogoSI from "../../../Img/LogoSI.png";
 import "./Home.css";
+import apiDosenProfil from "../../../lib/api/dosen/profil";
+import apiMahasiswaProfil from "../../../lib/api/mahasiswa/profil";
+import apiManageClass from "../../../lib/api/admin/manageClass";
 
 function Home() {
-  const isAuthenticated = localStorage.getItem("token");
   const role = localStorage.getItem("role");
 
-
   switch (role) {
-    case "admin":
-      window.location.href = "/admin/dashboard";
+    case "admin": {
+      const getData = async () => {
+        try {
+          await apiManageClass.dashboard().then(() => {
+            window.location.href = "/admin/dashboard";
+          });
+        } catch (err) {
+          localStorage.removeItem("token");
+          localStorage.removeItem("role");
+          window.location.reload();
+        }
+      };
+      getData();
       return;
-    case "dosen":
-      window.location.href = "/dosen/dashboard";
+    }
+
+    case "dosen": {
+      const getData = async () => {
+        try {
+          await apiDosenProfil.info().then(() => {
+            window.location.href = "/dosen/dashboard";
+          });
+        } catch (err) {
+          localStorage.removeItem("token");
+          localStorage.removeItem("role");
+          window.location.reload();
+        }
+      };
+      getData();
       return;
-    case "mahasiswa":
-      window.location.href = "/dashboard";
+    }
+
+    case "mahasiswa": {
+      const getData = async () => {
+        try {
+          await apiMahasiswaProfil.info().then(() => {
+            window.location.href = "/dashboard";
+          });
+        } catch (err) {
+          localStorage.removeItem("token");
+          localStorage.removeItem("role");
+          window.location.reload();
+        }
+      };
+      getData();
       return;
+    }
 
     default:
       break;
   }
-  
 
   return (
     <div>

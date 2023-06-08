@@ -3,7 +3,7 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import NavBarHome from '../../Component/NavBarHome/NavBarHome'
-import {MDBContainer, MDBCardImage, MDBRow, MDBCol, } from 'mdb-react-ui-kit';
+import {MDBContainer, MDBRow, MDBCol, } from 'mdb-react-ui-kit';
 
 export function LoginMahasiswa(){
 

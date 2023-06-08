@@ -1,3 +1,3 @@
-export * from "./LoginAdmin"
-export * from "./LoginDosen.jsx"
-export * from "./LoginMahasiswa.jsx"
+export * from "./LoginAdmin";
+export * from "./LoginDosen";
+export * from "./LoginMahasiswa";

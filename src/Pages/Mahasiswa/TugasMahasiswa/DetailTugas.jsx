@@ -52,12 +52,17 @@ export function DetailTugas() {
         <div class="border-t-8 border-gray-800 items-center text-gray-800 shadow-lg rounded-lg p-3">
           <div className="flex justify-between">
             <div class="text-2xl font-semibold"> {data?.title}</div>
-            <div class="text-lg font-semibold text-blue-800">
-              {data?.pengumpulan?.length === 1 &&
-              data?.pengumpulan[0]?.nilai === "0"
-                ? "Proses Penilaian"
-                : "Nilai: " + data?.pengumpulan[0]?.nilai}
-            </div>
+            {data?.pengumpulan?.map((value) => {
+              if(value.nilai === "0"){
+                return <div class="text-lg font-semibold text-blue-800">
+                Proses Penilaian
+              </div>
+              } else{
+                return<div class="text-lg font-semibold text-blue-800">
+                Nilai : {value.nilai}
+              </div>
+              }
+            })}
           </div>
           <div className="text-gray-500 text-sm"> {formattedDate}</div>
           <div className="text-lg mt-2 bg-gray-100  p-2 rounded text-gray-500 mb-4">

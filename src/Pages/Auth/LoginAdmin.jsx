@@ -1,10 +1,9 @@
 import React from "react";
 import NavBarHome from "../../Component/NavBarHome/NavBarHome";
-import { MDBContainer, MDBCardImage, MDBRow, MDBCol } from "mdb-react-ui-kit";
+import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import apiAuth from "../../lib/api/auth";
 import axios from "axios";
 
 export const LoginAdmin = () => {

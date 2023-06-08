@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import { Layout } from "../Layout/Layout";
-import {
-  Tab,
-  Tabs,
-  Box,
-  Grid,
-} from "@mui/material";
+import { Tab, Tabs, Box, Grid } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
+import { GiTeacher } from "react-icons/gi";
+import { MdPendingActions } from "react-icons/md";
 import { ModalDelete } from "../../../Component/Modal";
 import apiManageSubject from "../../../lib/api/admin/manageSubject";
-import { MateriForm} from "./MateriForm";
+import { MateriForm } from "./MateriForm";
 import apiDosenClass from "../../../lib/api/dosen/class";
 import { TugasForm } from "./TugasForm";
+import { MeetingForm } from "./MeetingForm";
+import { AttendanceForm } from "./AttendanceForm";
 
 export function DosenClassDetail() {
   const [data, setData] = useState();
@@ -21,10 +20,13 @@ export function DosenClassDetail() {
   const [openDeleteMapel, setOpenDeleteMapel] = useState(false);
   const [openForm, setOpenForm] = useState(false);
   const [openFormMateri, setOpenFormMateri] = useState(false);
+  const [openFormMeeting, setOpenFormMeeting] = useState(false);
+  const [openAttendance, setOpenAttendance] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [openEditMapel, setOpenEditMapel] = useState(false);
   const [selectedData, setSelectedData] = useState();
   const [reloadTable, setReloadTable] = useState(false);
+  const [meetingSoon, setMeetingSoon] = useState();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -32,9 +34,14 @@ export function DosenClassDetail() {
 
   useEffect(() => {
     const getData = async () => {
-      await apiDosenClass
-        .subjectDetail(id)
-        .then((res) => setData(res.data.data));
+      try {
+        await apiDosenClass.subjectDetail(id).then((res) => {
+          setData(res.data.data);
+          setMeetingSoon(res.data.data.pertemuan.length + 1);
+        });
+      } catch (err) {
+        console.log(err);
+      }
     };
     getData();
   }, [reloadTable]);
@@ -57,7 +64,6 @@ export function DosenClassDetail() {
         <div className="overflow-hidden">
           <div className="mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex py-8">
-              {/* <div className="lg:grid lg:grid-cols-12 lg:gap-8"> */}
               <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
                 <h1 className="text-xl tracking-tight font-extrabold text-white sm:text-5xl md:text-4xl">
                   <span className="text-yellow-400">{data?.nama_mapel}</span>
@@ -69,7 +75,6 @@ export function DosenClassDetail() {
                   {data?.day} | {data?.start_time} - {data?.end_time}{" "}
                 </p>
               </div>
-              {/* </div> */}
             </div>
           </div>
         </div>
@@ -77,6 +82,7 @@ export function DosenClassDetail() {
       <Tabs value={value} onChange={handleChange}>
         <Tab label="Materi" />
         <Tab label="Tugas" />
+        <Tab label="Absen" />
       </Tabs>
 
       <TabPanel value={value} index={0}>
@@ -153,6 +159,37 @@ export function DosenClassDetail() {
           ))}
         </Grid>
       </TabPanel>
+      <TabPanel value={value} index={2}>
+        {" "}
+        <button
+          className="bg-yellow-400 mt-4 text-white flex p-2 rounded"
+          onClick={() => setOpenFormMeeting(true)}
+        >
+          Tambah Pertemuan
+        </button>
+        <Grid container columnSpacing={2} rowSpacing={2} className="mt-2">
+          {data?.pertemuan?.map((row) => (
+            <Grid item xl={2} lg={3} md={4} sm={6} xs={12}>
+              <div className="flex justify-between border-t-8 border-t-yellow-700 items-center  mt-4 p-4 rounded-md overflow-hidden shadow-lg">
+                <div className="flex gap-2 items-center">
+                  <GiTeacher className="text-yellow-500" size={36} />
+                  <div className="font-bold text-xl text-gray-500">
+                    Pertemuan {row.pertemuan}
+                  </div>
+                </div>
+                <MdPendingActions
+                  className="text-yellow-900 cursor-pointer"
+                  size={24}
+                  onClick={() => {
+                    setSelectedData(row);
+                    setOpenAttendance(true);
+                  }}
+                />
+              </div>
+            </Grid>
+          ))}
+        </Grid>
+      </TabPanel>
       <TugasForm
         method="add"
         open={openForm}
@@ -160,6 +197,24 @@ export function DosenClassDetail() {
         onSuccess={() => {
           setReloadTable(!reloadTable);
           setOpenForm(false);
+        }}
+      />
+      <MeetingForm
+        meetingSoon={meetingSoon}
+        open={openFormMeeting}
+        onClose={() => setOpenFormMeeting(false)}
+        onSuccess={() => {
+          setReloadTable(!reloadTable);
+          setOpenFormMeeting(false);
+        }}
+      />
+      <AttendanceForm
+        meetingSoon={meetingSoon}
+        open={openAttendance}
+        selectedData={selectedData}
+        onClose={() => {
+          setReloadTable(!reloadTable);
+          setOpenAttendance(false);
         }}
       />
       <TugasForm
