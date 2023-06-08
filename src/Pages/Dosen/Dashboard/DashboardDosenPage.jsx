@@ -11,6 +11,21 @@ import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
 export function DashboardDosenPage() {
   const [user, setUser] = useState({});
   const [mapel, setMapel] = useState([]);
+  const [greeting, setGreeting] = useState('');
+
+  useEffect(() => {
+    const currentHour = new Date().getHours();
+
+    if (currentHour >= 4 && currentHour < 12) {
+      setGreeting('Selamat Pagi');
+    } else if (currentHour >= 12 && currentHour < 18) {
+      setGreeting('Selamat Siang');
+    } else if (currentHour >= 18 && currentHour < 20) {
+      setGreeting('Selamat Sore');
+    } else {
+      setGreeting('Selamat Malam');
+    }
+  }, []);
 
   useEffect(() => {
     const getData = async () => {
@@ -23,7 +38,7 @@ export function DashboardDosenPage() {
   return (
     <Layout>
       <div class="bg-gradient-to-r from-yellow-200 to-yellow-400 text-yellow-800 shadow-lg rounded-lg p-6">
-        <h6 class="text-2xl font-semibold mb-3"> Selamat Datang {user.nama}</h6>
+        <h6 class="text-2xl font-semibold mb-3"> {greeting} {user.nama}</h6>
       </div>
       <Grid container columnSpacing={2} rowSpacing={2} className="mt-2">
         {mapel.map((row) => (

@@ -18,6 +18,7 @@ import { FiExternalLink } from "react-icons/fi";
 import { Link, useParams } from "react-router-dom";
 import apiMahasiswaClass from "../../../lib/api/mahasiswa/class";
 import { GiWhiteBook } from "react-icons/gi";
+import "./banner.css";
 
 export function StudentClassDetail() {
   const [data, setData] = useState();
@@ -39,11 +40,22 @@ export function StudentClassDetail() {
 
   return (
     <Layout>
-      <div className="bg-gray-900 mt-4 rounded">
+      <div className="hero-banner">
+        {/* <div className="h-full  opacity-70 p-4 bg-black flex items-center rounded"> */}
+        <div className="hero-content">
+          <h1 className="hero-title">{data?.nama_mapel}</h1>
+          <p className="hero-description">{data?.deskripsi_mapel}</p>
+          <p>
+            {" "}
+            {data?.day} | {data?.start_time} - {data?.end_time}{" "}
+          </p>
+          {/* </div> */}
+        </div>
+      </div>
+      {/* <div className="bg-gray-900 mt-4 rounded">
         <div className="overflow-hidden">
           <div className="mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex sm:py-16 py-8">
-              {/* <div className="lg:grid lg:grid-cols-12 lg:gap-8"> */}
               <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
                 <h1 className="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
                   <span className="text-cyan-400">{data?.nama_mapel}</span>
@@ -55,11 +67,10 @@ export function StudentClassDetail() {
                   {data?.day} | {data?.start_time} - {data?.end_time}{" "}
                 </p>
               </div>
-              {/* </div> */}
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <Tabs value={value} onChange={handleChange}>
         <Tab label="Materi" />
         <Tab label="Tugas" />

@@ -11,6 +11,21 @@ import { FaChalkboardTeacher } from "react-icons/fa";
 export function DashboardStudent() {
   const [user, setUser] = useState({});
   const [mapel, setMapel] = useState([]);
+  const [greeting, setGreeting] = useState('');
+
+  useEffect(() => {
+    const currentHour = new Date().getHours();
+
+    if (currentHour >= 4 && currentHour < 12) {
+      setGreeting('Selamat Pagi');
+    } else if (currentHour >= 12 && currentHour < 18) {
+      setGreeting('Selamat Siang');
+    } else if (currentHour >= 18 && currentHour < 20) {
+      setGreeting('Selamat Sore');
+    } else {
+      setGreeting('Selamat Malam');
+    }
+  }, []);
 
   useEffect(() => {
     const getData = async () => {
@@ -31,7 +46,7 @@ export function DashboardStudent() {
       <div className="bg-gradient-to-r from-cyan-200 to-cyan-400 text-cyan-800 shadow-lg rounded-lg p-6">
         <h6 className="text-2xl font-semibold mb-3">
           {" "}
-          Selamat Datang {user.nama}
+          {greeting} {user.nama}
         </h6>
       </div>
       <div className="mt-4">

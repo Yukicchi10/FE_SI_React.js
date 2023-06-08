@@ -1,0 +1,24 @@
+.hero-banner {
+    background-image: url('banner.png');
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+  }
+  .hero-content {
+    text-align: center;
+    color: #fff;
+  }
+  
+  .hero-title {
+    font-size: 36px;
+    margin-bottom: 16px;
+  }
+  
+  .hero-description {
+    font-size: 18px;
+  }
+  
