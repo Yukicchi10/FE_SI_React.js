@@ -11,19 +11,19 @@ import { FaChalkboardTeacher } from "react-icons/fa";
 export function DashboardStudent() {
   const [user, setUser] = useState({});
   const [mapel, setMapel] = useState([]);
-  const [greeting, setGreeting] = useState('');
+  const [greeting, setGreeting] = useState("");
 
   useEffect(() => {
     const currentHour = new Date().getHours();
 
     if (currentHour >= 4 && currentHour < 12) {
-      setGreeting('Selamat Pagi');
+      setGreeting("Selamat Pagi");
     } else if (currentHour >= 12 && currentHour < 18) {
-      setGreeting('Selamat Siang');
+      setGreeting("Selamat Siang");
     } else if (currentHour >= 18 && currentHour < 20) {
-      setGreeting('Selamat Sore');
+      setGreeting("Selamat Sore");
     } else {
-      setGreeting('Selamat Malam');
+      setGreeting("Selamat Malam");
     }
   }, []);
 
@@ -50,39 +50,47 @@ export function DashboardStudent() {
         </h6>
       </div>
       <div className="mt-4">
-        {mapel.map((row) => (
-          <div className="mt-2  rounded overflow-hidden shadow-lg">
-            <div className="p-2 text-center font-bold text-white bg-cyan-500">
-              {row.nama_mapel} ({row.sks} SKS)
-            </div>
-            <div className="p-4">
-              <div className="flex gap-2 items-center">
-                <FaChalkboardTeacher />{" "}
-                <div className="text-gray-700 text-base ">
-                  {row.teacher_name}
+        {" "}
+        <Grid container columnSpacing={2} rowSpacing={2} className="mt-2">
+          {mapel.map((row) => (
+            <Grid item xl={2} lg={3} md={4} sm={6} xs={12}>
+              <div className="mt-2 rounded-lg overflow-hidden shadow-lg">
+                <img src="/card-1.jpg" className="h-48 w-full object-cover" alt="mapel" />
+                <div className="p-2 text-center font-bold ">
+                  {row.nama_mapel} ({row.sks} SKS)
+                </div>
+                <div className="px-4 pb-4">
+                  <div className="flex gap-2 items-center">
+                    <FaChalkboardTeacher />{" "}
+                    <div className="text-gray-700 text-base ">
+                      {row.teacher_name}
+                    </div>
+                  </div>
+                  <div className="flex gap-2 items-center">
+                    <HiOutlineBuildingOffice2 />{" "}
+                    <div className="text-gray-700 text-base ">{row.room}</div>
+                  </div>
+                  <div className="flex gap-2 items-center mb-2">
+                    <BiTime />{" "}
+                    <div className="text-gray-700 text-base ">
+                      {" "}
+                      {row.day} | {row.start_time.toString()} -{" "}
+                      {row.end_time.toString()}
+                    </div>
+                  </div>{" "}
+                  <div className="flex justify-center">
+                    <Link
+                      to={`/kelas/${row.id}`}
+                      className="cursor-pointer no-underline text-center !w-full bg-blue-600 text-white px-4 py-2 rounded-lg"
+                    >
+                      Buka
+                    </Link>
+                  </div>
                 </div>
               </div>
-              <div className="flex gap-2 items-center">
-                <HiOutlineBuildingOffice2 />{" "}
-                <div className="text-gray-700 text-base ">{row.room}</div>
-              </div>
-              <div className="flex gap-2 items-center mb-2">
-                <BiTime />{" "}
-                <div className="text-gray-700 text-base ">
-                  {" "}
-                  {row.day} | {row.start_time.toString()} -{" "}
-                  {row.end_time.toString()}
-                </div>
-              </div>{" "}
-              <Link
-                to={`/kelas/${row.id}`}
-                className="cursor-pointer no-underline !mt-8 w-12 bg-blue-600 text-white px-4 py-2 rounded"
-              >
-                Buka
-              </Link>
-            </div>
-          </div>
-        ))}
+            </Grid>
+          ))}
+        </Grid>
       </div>
     </Layout>
   );

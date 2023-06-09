@@ -42,7 +42,7 @@ function BasicExample() {
               <NavDropdown.Item href={PDFskripsi} target="_blank ">Panduan Skripsi 2022</NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="About Us" id="basic-nav-dropdown">
-            <NavDropdown.Item href="/home/About-Us">LMS SI</NavDropdown.Item>
+            <NavDropdown.Item href="/about-us">LMS SI</NavDropdown.Item>
             <NavDropdown.Item href="https://institutpendidikan.ac.id/" target="_blank">IPI Garut</NavDropdown.Item>
             <NavDropdown.Item href="https://si.institutpendidikan.ac.id/" target="_blank">Sistem Informasi</NavDropdown.Item>
             <NavDropdown.Item href="/home/profil-dosen" >Dosen Pengajar</NavDropdown.Item>

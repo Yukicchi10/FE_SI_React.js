@@ -38,7 +38,7 @@ export function RoutePage() {
       <Route path="/login" element={<LoginMahasiswa />} />
       <Route path="/login/lecturer" element={<LoginDosen />} />
       <Route path="/login/admin" element={<LoginAdmin />} />
-      <Route path="/home/About-Us" element={<AboutUs />} />
+      <Route path="/about-us" element={<AboutUs />} />
       <Route path="/home/profil-dosen" element={<ProfilDosen />} />
 
       {/* Admin Session */}
