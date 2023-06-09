@@ -1,29 +1,21 @@
 import { useEffect, useState } from "react";
 import { FaTrashAlt, FaPencilAlt, FaEye } from "react-icons/fa";
+import { AiFillLike, AiOutlineLike, AiOutlineComment } from "react-icons/ai";
 import { Layout } from "../Layout/Layout";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-  Tab,
-  Tabs,
-  Box,
-  Grid,
-} from "@mui/material";
+import { Tab, Tabs, Box, Grid } from "@mui/material";
 import { FiExternalLink } from "react-icons/fi";
 import { Link, useParams } from "react-router-dom";
 import apiMahasiswaClass from "../../../lib/api/mahasiswa/class";
 import { GiWhiteBook } from "react-icons/gi";
 import "./banner.css";
+import Avatar from "../../../Component/Avatar";
 
 export function StudentClassDetail() {
   const [data, setData] = useState();
   const { id } = useParams();
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(2);
+  const [threads, setThreads] = useState([]);
+  const [reloadData, setReloadData] = useState(false)
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -34,9 +26,22 @@ export function StudentClassDetail() {
       await apiMahasiswaClass
         .subjectDetail(id)
         .then((res) => setData(res.data.data));
+      await apiMahasiswaClass
+        .listThread(id)
+        .then((res) => setThreads(res.data.data));
     };
     getData();
-  }, []);
+  }, [reloadData]);
+
+  const handleLike = async (idThread) =>{
+    const body = {
+      id_thread : idThread,
+      id_mapel : id
+    }
+    await apiMahasiswaClass
+    .likeThread(body)
+    .then((res) => setReloadData(!reloadData));
+  }
 
   return (
     <Layout>
@@ -53,6 +58,7 @@ export function StudentClassDetail() {
       <Tabs value={value} onChange={handleChange}>
         <Tab label="Materi" />
         <Tab label="Tugas" />
+        <Tab label="Ruang Diskusi" />
       </Tabs>
       <TabPanel value={value} index={0}>
         <Grid container columnSpacing={2} rowSpacing={2} className="mt-2">
@@ -97,6 +103,40 @@ export function StudentClassDetail() {
             </div>
           </div>
         ))}
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        {threads.map((row) => {
+          const date = new Date(row.created_at);
+
+          const options = {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          };
+
+          const formattedDate = date.toLocaleDateString("id-ID", options);
+          return (
+            <div className="w-full p-4 mt-4 rounded overflow-hidden shadow-lg">
+              <div className="flex gap-2 items-center">
+                <Avatar name={row.name} />
+                <div className="flex flex-col">
+                  <div className="font-bold">{row.name}</div>
+                  <div className="text-gray-500 text-sm">{formattedDate}</div>
+                </div>
+              </div>
+              <p className="mt-2 text-gray-800">{row.content}</p>
+              <div className="flex gap-1 items-center">
+                {row.isLike ? (
+                  <AiFillLike onClick={() => handleLike(row.id)} className="cursor-pointer text-lg text-blue-500" />
+                ) : (
+                  <AiOutlineLike onClick={() => handleLike(row.id)} className="cursor-pointer text-lg" />
+                )}
+                {row.likes}
+                <AiOutlineComment /> {row.replies}
+              </div>
+            </div>
+          );
+        })}
       </TabPanel>
     </Layout>
   );
