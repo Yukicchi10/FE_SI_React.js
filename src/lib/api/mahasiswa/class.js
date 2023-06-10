@@ -11,9 +11,11 @@ const uploadTugas = (data) =>
 
 const calendar = () => instance.auth.get("/mahasiswa/calendar");
 
+const createThread = (data) => instance.auth.post(`/mahasiswa/thread`, data)
 const listThread = (id) => instance.auth.get(`/mahasiswa/mapel/${id}/thread`);
 const likeThread = (data) =>
   instance.auth.post(`/mahasiswa/thread/likes`, data);
+const deleteThread = (id) => instance.auth.delete(`/mahasiswa/thread/${id}`)  
 
 const apiMahasiswaClass = {
   subjectList,
@@ -23,8 +25,10 @@ const apiMahasiswaClass = {
   detailTugas,
   uploadTugas,
   calendar,
+  createThread,
   listThread,
   likeThread,
+  deleteThread
 };
 
 export default apiMahasiswaClass;

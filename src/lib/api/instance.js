@@ -2,7 +2,6 @@ import axios from "axios";
 import baseUrl from "../config";
 
 const api = baseUrl + "/api";
-const pathImg = baseUrl + "/storage/images/";
 
 const noAuth = axios.create({
   baseURL: api,
@@ -18,19 +17,9 @@ const auth = axios.create({
   },
 });
 
-const authwithFile = axios.create({
-  baseURL: api,
-  headers: {
-    Content_Type: "multipart/form-data",
-    authorization: "Bearer " + localStorage.getItem("token"),
-  },
-});
-
 const instance = {
   noAuth,
   auth,
-  authwithFile,
-  pathImg,
 };
 
 export default instance;

@@ -1,12 +1,7 @@
 import { Box, Grid } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
 import { ModalForm } from "../../../Component/Modal";
-import {
-  TimeForm,
-  SelectForm,
-  TextFieldForm,
-  PDFFileUploader,
-} from "../../../Component/Input";
+import { TextFieldForm, PDFFileUploader } from "../../../Component/Input";
 import { Controller, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import apiManageSubject from "../../../lib/api/admin/manageSubject";
