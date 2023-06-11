@@ -1,6 +1,18 @@
 import { useEffect, useState } from "react";
 import { Layout } from "../Layout/Layout";
-import { Tab, Tabs, Box, Grid } from "@mui/material";
+import {
+  Tab,
+  Tabs,
+  Box,
+  Grid,
+  Table,
+  TableHead,
+  TableCell,
+  TableBody,
+  Paper,
+  TableRow,
+  TableContainer,
+} from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import { GiTeacher } from "react-icons/gi";
 import { MdPendingActions } from "react-icons/md";
@@ -15,7 +27,7 @@ import { AttendanceForm } from "./AttendanceForm";
 export function DosenClassDetail() {
   const [data, setData] = useState();
   const { id } = useParams();
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(3);
   const [openDelete, setOpenDelete] = useState(false);
   const [openDeleteMapel, setOpenDeleteMapel] = useState(false);
   const [openForm, setOpenForm] = useState(false);
@@ -27,6 +39,7 @@ export function DosenClassDetail() {
   const [selectedData, setSelectedData] = useState();
   const [reloadTable, setReloadTable] = useState(false);
   const [meetingSoon, setMeetingSoon] = useState();
+  const [recapAttendance, setRecapAttendance] = useState([]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -38,6 +51,9 @@ export function DosenClassDetail() {
         await apiDosenClass.subjectDetail(id).then((res) => {
           setData(res.data.data);
           setMeetingSoon(res.data.data.pertemuan.length + 1);
+        });
+        await apiDosenClass.recapAttendance(id).then((res) => {
+          setRecapAttendance(res.data.data);
         });
       } catch (err) {
         console.log(err);
@@ -83,6 +99,7 @@ export function DosenClassDetail() {
         <Tab label="Materi" />
         <Tab label="Tugas" />
         <Tab label="Absen" />
+        <Tab label="Rekap Absen" />
       </Tabs>
 
       <TabPanel value={value} index={0}>
@@ -189,6 +206,44 @@ export function DosenClassDetail() {
             </Grid>
           ))}
         </Grid>
+      </TabPanel>
+
+      <TabPanel value={value} index={3}>
+        <TableContainer component={Paper} className="mt-2">
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell rowSpan={2} className="!font-bold">
+                  Nama
+                </TableCell>
+                <TableCell
+                  colSpan={data?.pertemuan?.length}
+                  className="!font-bold text-center" 
+                >
+                  Pertemuan ke
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                {data?.pertemuan?.map((value) => (
+                  <TableCell className="!font-bold text-center">
+                    {value.pertemuan}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {recapAttendance?.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell>{row.nama}</TableCell>
+                  {row?.absen?.map((value) => (
+                    <TableCell className="text-center" >{value.status}</TableCell>
+                  ))}
+                  <TableCell></TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </TabPanel>
       <TugasForm
         method="add"

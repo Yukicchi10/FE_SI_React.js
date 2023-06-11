@@ -55,7 +55,7 @@ export function AttendanceForm({ open, onClose, selectedData, onSuccess }) {
                   <TableCell>
                     <Select
                       defaultValue={row.status}
-                      onChange={(e) => onSubmit(e.target.value, row.id)}
+                      onChange={(e) => onSubmit(e.target.value, row.id_mahasiswa)}
                     >
                       <MenuItem disabled value="-">
                         Status

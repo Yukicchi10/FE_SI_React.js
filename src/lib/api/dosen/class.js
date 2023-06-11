@@ -15,6 +15,7 @@ const nilaiTugas = (id, data) => instance.auth.put(`/dosen/tugas/penilaian/${id}
 
 const addMeeting = (data) => instance.auth.post(`/dosen/pertemuan`, data)
 const checkAttendance = (data) => instance.auth.post(`/dosen/absen/siswa`, data)
+const recapAttendance = (id) => instance.auth.get(`/dosen/mapel/absen/${id}`)
 
 const apiDosenClass = {
   listMateri,
@@ -28,7 +29,8 @@ const apiDosenClass = {
   editTugas,
   nilaiTugas,
   addMeeting,
-  checkAttendance
+  checkAttendance,
+  recapAttendance
 };
 
 export default apiDosenClass;
