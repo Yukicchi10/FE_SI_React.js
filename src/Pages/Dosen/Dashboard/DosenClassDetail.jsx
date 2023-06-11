@@ -27,6 +27,8 @@ import { MeetingForm } from "./MeetingForm";
 import { AttendanceForm } from "./AttendanceForm";
 import { AiFillLike, AiOutlineComment, AiOutlineLike } from "react-icons/ai";
 import { FaTrashAlt } from "react-icons/fa";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 import Avatar from "../../../Component/Avatar";
 
 export function DosenClassDetail() {
@@ -99,9 +101,7 @@ export function DosenClassDetail() {
       id_thread: idThread,
       id_mapel: id,
     };
-    await apiDosenClass
-      .likeThread(body)
-      .then(() => setReloadData(!reloadData));
+    await apiDosenClass.likeThread(body).then(() => setReloadData(!reloadData));
   };
 
   const handleSendThread = async () => {
@@ -109,7 +109,7 @@ export function DosenClassDetail() {
       id_mapel: id,
       content: thread,
     };
-    
+
     try {
       await apiDosenClass.createThread(body).then(() => {
         setThread("");
@@ -129,6 +129,24 @@ export function DosenClassDetail() {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const exportToPDF = () => {
+    const input = document.getElementById("table-to-export");
+
+    html2canvas(input)
+      .then((canvas) => {
+        const pdf = new jsPDF("p", "mm", "a4");
+        const imgData = canvas.toDataURL("image/png");
+        const imgWidth = pdf.internal.pageSize.getWidth();
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+        pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+        pdf.save("table.pdf");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -267,41 +285,51 @@ export function DosenClassDetail() {
       </TabPanel>
 
       <TabPanel value={value} index={3}>
-        <TableContainer component={Paper} className="mt-2">
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell rowSpan={2} className="!font-bold">
-                  Nama
-                </TableCell>
-                <TableCell
-                  colSpan={data?.pertemuan?.length}
-                  className="!font-bold text-center" 
-                >
-                  Pertemuan ke
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                {data?.pertemuan?.map((value) => (
-                  <TableCell className="!font-bold text-center">
-                    {value.pertemuan}
+        <button
+          className="bg-yellow-400 mt-4 text-white flex p-2 rounded"
+          onClick={exportToPDF}
+        >
+          Export to PDF
+        </button>
+        <div id="table-to-export">
+          <TableContainer component={Paper} className="mt-2">
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell rowSpan={2} className="!font-bold">
+                    Nama
                   </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {recapAttendance?.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.nama}</TableCell>
-                  {row?.absen?.map((value) => (
-                    <TableCell className="text-center" >{value.status}</TableCell>
-                  ))}
-                  <TableCell></TableCell>
+                  <TableCell
+                    colSpan={data?.pertemuan?.length}
+                    className="!font-bold text-center"
+                  >
+                    Pertemuan ke
+                  </TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+                <TableRow>
+                  {data?.pertemuan?.map((value) => (
+                    <TableCell className="!font-bold text-center">
+                      {value.pertemuan}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {recapAttendance?.map((row) => (
+                  <TableRow key={row.id}>
+                    <TableCell>{row.nama}</TableCell>
+                    {row?.absen?.map((value) => (
+                      <TableCell className="text-center">
+                        {value.status}
+                      </TableCell>
+                    ))}
+                    <TableCell></TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
       </TabPanel>
       <TabPanel value={value} index={4}>
         <div className="mt-2 bg-white">
@@ -372,7 +400,7 @@ export function DosenClassDetail() {
                     to={`/dosen/kelas/diskusi/${row.id}`}
                     className="cursor-pointer no-underline text-center text-gray-500"
                   >
-                    <AiOutlineComment/>
+                    <AiOutlineComment />
                   </Link>
                   {row.replies}
                 </div>
