@@ -1,26 +1,40 @@
 import { useEffect, useState } from "react";
-import { FaTrashAlt, FaPencilAlt, FaEye } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
 import { AiFillLike, AiOutlineLike, AiOutlineComment } from "react-icons/ai";
 import { Layout } from "../Layout/Layout";
-import { Tab, Tabs, Box, Grid, Button, TextField } from "@mui/material";
+import {
+  Tab,
+  Tabs,
+  Box,
+  Grid,
+  Button,
+  TextField,
+  Table,
+  TableHead,
+  TableCell,
+  TableBody,
+  Paper,
+  TableRow,
+  TableContainer,
+} from "@mui/material";
 import { FiExternalLink } from "react-icons/fi";
 import { Link, useParams } from "react-router-dom";
 import apiMahasiswaClass from "../../../lib/api/mahasiswa/class";
 import { GiWhiteBook } from "react-icons/gi";
 import "./banner.css";
 import Avatar from "../../../Component/Avatar";
-import { useForm } from "react-hook-form";
 import { ModalDelete } from "../../../Component/Modal";
 
 export function StudentClassDetail() {
   const [data, setData] = useState();
   const { id } = useParams();
-  const [value, setValue] = useState(2);
+  const [value, setValue] = useState(0);
   const [threads, setThreads] = useState([]);
   const [reloadData, setReloadData] = useState(false);
   const [thread, setThread] = useState("");
   const [selectedData, setSelectedData] = useState();
   const [openDelete, setOpenDelete] = useState(false);
+  const [recapAttendance, setRecapAttendance] = useState([]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -34,6 +48,9 @@ export function StudentClassDetail() {
       await apiMahasiswaClass
         .listThread(id)
         .then((res) => setThreads(res.data.data));
+      await apiMahasiswaClass.recapAttendance(id).then((res) => {
+        setRecapAttendance(res.data.data);
+      });
     };
     getData();
   }, [reloadData]);
@@ -53,7 +70,7 @@ export function StudentClassDetail() {
       id_mapel: id,
       content: thread,
     };
-    console.log(body);
+
     try {
       await apiMahasiswaClass.createThread(body).then(() => {
         setThread("");
@@ -68,7 +85,7 @@ export function StudentClassDetail() {
     try {
       await apiMahasiswaClass.deleteThread(selectedData.id).then(() => {
         setReloadData(!reloadData);
-        setOpenDelete(false)
+        setOpenDelete(false);
       });
     } catch (err) {
       console.log(err);
@@ -90,6 +107,7 @@ export function StudentClassDetail() {
       <Tabs value={value} onChange={handleChange}>
         <Tab label="Materi" />
         <Tab label="Tugas" />
+        <Tab label="Absen" />
         <Tab label="Ruang Diskusi" />
       </Tabs>
       <TabPanel value={value} index={0}>
@@ -137,6 +155,45 @@ export function StudentClassDetail() {
         ))}
       </TabPanel>
       <TabPanel value={value} index={2}>
+        <TableContainer component={Paper} className="mt-2">
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell rowSpan={2} className="!font-bold">
+                  Nama
+                </TableCell>
+                <TableCell
+                  colSpan={data?.pertemuan?.length}
+                  className="!font-bold text-center"
+                >
+                  Pertemuan ke
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                {data?.pertemuan?.map((value) => (
+                  <TableCell className="!font-bold text-center">
+                    {value.pertemuan}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {recapAttendance?.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell>{row.nama}</TableCell>
+                  {row?.absen?.map((value) => (
+                    <TableCell className="text-center">
+                      {value.status}
+                    </TableCell>
+                  ))}
+                  <TableCell></TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </TabPanel>
+      <TabPanel value={value} index={3}>
         <div className="mt-2 bg-white">
           <TextField
             label="Buat Diskusi"
@@ -168,9 +225,9 @@ export function StudentClassDetail() {
             year: "numeric",
           };
 
-          const formattedTime = date.toLocaleTimeString('id-ID', {
-            hour: '2-digit',
-            minute: '2-digit',
+          const formattedTime = date.toLocaleTimeString("id-ID", {
+            hour: "2-digit",
+            minute: "2-digit",
           });
 
           const formattedDate = date.toLocaleDateString("id-ID", options);
@@ -181,30 +238,42 @@ export function StudentClassDetail() {
                 <Avatar name={row.name} />
                 <div className="flex flex-col">
                   <div className="font-bold">{row.name}</div>
-                  <div className="text-gray-500 text-sm">{formattedDateTime}</div>
+                  <div className="text-gray-500 text-sm">
+                    {formattedDateTime}
+                  </div>
                 </div>
               </div>
               <p className="mt-2 text-gray-800">{row.content}</p>
-              <div className="flex gap-1 items-center">
-                {row.isLike ? (
-                  <AiFillLike
-                    onClick={() => handleLike(row.id)}
-                    className="cursor-pointer text-lg text-blue-500"
-                  />
-                ) : (
-                  <AiOutlineLike
-                    onClick={() => handleLike(row.id)}
-                    className="cursor-pointer text-lg"
-                  />
-                )}
-                {row.likes}
+              <div className="flex justify-between gap-1 items-center">
+                <div className="flex items-center gap-2">
+                  {row.isLike ? (
+                    <AiFillLike
+                      onClick={() => handleLike(row.id)}
+                      className="cursor-pointer text-lg text-blue-500"
+                    />
+                  ) : (
+                    <AiOutlineLike
+                      onClick={() => handleLike(row.id)}
+                      className="cursor-pointer text-lg"
+                    />
+                  )}
+                  {row.likes}
+                  <Link
+                    to={`/kelas/diskusi/${row.id}`}
+                    className="cursor-pointer no-underline text-center text-gray-500"
+                  >
+                    <AiOutlineComment />
+                  </Link>
+                  {row.replies}
+                </div>
+
                 {row.isMe && (
                   <FaTrashAlt
                     onClick={() => {
                       setSelectedData(row);
                       setOpenDelete(true);
                     }}
-                    className="text-red-400 cursor-pointer"
+                    className="text-gray-700 cursor-pointer"
                   />
                 )}
               </div>

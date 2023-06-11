@@ -17,6 +17,15 @@ const addMeeting = (data) => instance.auth.post(`/dosen/pertemuan`, data)
 const checkAttendance = (data) => instance.auth.post(`/dosen/absen/siswa`, data)
 const recapAttendance = (id) => instance.auth.get(`/dosen/mapel/absen/${id}`)
 
+const createThread = (data) => instance.auth.post(`/dosen/thread`, data)
+const listThread = (id) => instance.auth.get(`/dosen/mapel/${id}/thread`);
+const likeThread = (data) =>
+  instance.auth.post(`/dosen/thread/likes`, data);
+const deleteThread = (id) => instance.auth.delete(`/dosen/thread/${id}`) 
+const createReplies = (data) => instance.auth.post(`/dosen/thread/replies`, data)
+const detailThread = (id) => instance.auth.get(`/dosen/thread/${id}`);
+const deleteReplies = (id) => instance.auth.delete(`/dosen/replies/${id}`)  
+
 const apiDosenClass = {
   listMateri,
   subjectList,
@@ -30,7 +39,14 @@ const apiDosenClass = {
   nilaiTugas,
   addMeeting,
   checkAttendance,
-  recapAttendance
+  recapAttendance,
+  createThread,
+  listThread,
+  likeThread,
+  deleteThread,
+  createReplies,
+  detailThread,
+  deleteReplies
 };
 
 export default apiDosenClass;

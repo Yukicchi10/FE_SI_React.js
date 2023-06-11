@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const SideBar = () => {
   return (
-    <div className="fixed top-0 left-0 h-screen w-16 flex flex-col
+    <div className="fixed flex top-0 left-0 h-screen w-16 flex-col
                   bg-white dark:bg-gray-900 shadow-lg">
         <img src={logoSI} className='logsi'/>
         <Divider/>

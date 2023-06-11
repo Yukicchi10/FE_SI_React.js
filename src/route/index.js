@@ -29,6 +29,8 @@ import {
   CalendarAcademicDosen,
 } from "./../Pages/Dosen";
 import { CalendarAcademicStudent } from "../Pages/Mahasiswa/Calendar/CalendarAcademic";
+import DiscussionPage from "../Pages/Mahasiswa/Dashboard/DiscussionPage";
+import DosenDiscussionPage from "../Pages/Dosen/Dashboard/DosenDiscussionPage";
 
 export function RoutePage() {
   return (
@@ -56,10 +58,12 @@ export function RoutePage() {
       <Route path="/dosen/tugas/:id" element={<TugasDetail />} />
       <Route path="/dosen/profil" element={<ProfilDosen />} />
       <Route path="/dosen/kalender-akademik" element={<CalendarAcademicDosen />} />
+      <Route path="/dosen/kelas/diskusi/:id" element={<DosenDiscussionPage />} />
 
       {/* Mahasiswa Session */}
       <Route path="/dashboard" element={<DashboardStudent />} />
       <Route path="/kelas/:id" element={<StudentClassDetail />} />
+      <Route path="/kelas/diskusi/:id" element={<DiscussionPage />} />
       <Route path="/materi" element={<MateriMahasiswa />} />
       <Route path="/tugas" element={<TugasMahasiswa />} />
       <Route path="/tugas/:id" element={<DetailTugas />} />

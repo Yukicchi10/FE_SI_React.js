@@ -12,6 +12,8 @@ import {
   Paper,
   TableRow,
   TableContainer,
+  TextField,
+  Button,
 } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import { GiTeacher } from "react-icons/gi";
@@ -23,12 +25,16 @@ import apiDosenClass from "../../../lib/api/dosen/class";
 import { TugasForm } from "./TugasForm";
 import { MeetingForm } from "./MeetingForm";
 import { AttendanceForm } from "./AttendanceForm";
+import { AiFillLike, AiOutlineComment, AiOutlineLike } from "react-icons/ai";
+import { FaTrashAlt } from "react-icons/fa";
+import Avatar from "../../../Component/Avatar";
 
 export function DosenClassDetail() {
   const [data, setData] = useState();
   const { id } = useParams();
-  const [value, setValue] = useState(3);
+  const [value, setValue] = useState(0);
   const [openDelete, setOpenDelete] = useState(false);
+  const [openDeleteThread, setOpenDeleteThread] = useState(false);
   const [openDeleteMapel, setOpenDeleteMapel] = useState(false);
   const [openForm, setOpenForm] = useState(false);
   const [openFormMateri, setOpenFormMateri] = useState(false);
@@ -40,6 +46,9 @@ export function DosenClassDetail() {
   const [reloadTable, setReloadTable] = useState(false);
   const [meetingSoon, setMeetingSoon] = useState();
   const [recapAttendance, setRecapAttendance] = useState([]);
+  const [threads, setThreads] = useState([]);
+  const [thread, setThread] = useState("");
+  const [reloadData, setReloadData] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -62,6 +71,18 @@ export function DosenClassDetail() {
     getData();
   }, [reloadTable]);
 
+  useEffect(() => {
+    const getData = async () => {
+      await apiDosenClass
+        .subjectDetail(id)
+        .then((res) => setData(res.data.data));
+      await apiDosenClass
+        .listThread(id)
+        .then((res) => setThreads(res.data.data));
+    };
+    getData();
+  }, [reloadData]);
+
   const handleDelete = async () => {
     await apiDosenClass.materiDelete(selectedData.id);
     setReloadTable(!reloadTable);
@@ -72,6 +93,42 @@ export function DosenClassDetail() {
     await apiManageSubject.deleted(selectedData.id);
     setReloadTable(!reloadTable);
     setOpenDeleteMapel(false);
+  };
+  const handleLike = async (idThread) => {
+    const body = {
+      id_thread: idThread,
+      id_mapel: id,
+    };
+    await apiDosenClass
+      .likeThread(body)
+      .then(() => setReloadData(!reloadData));
+  };
+
+  const handleSendThread = async () => {
+    const body = {
+      id_mapel: id,
+      content: thread,
+    };
+    
+    try {
+      await apiDosenClass.createThread(body).then(() => {
+        setThread("");
+        setReloadData(!reloadData);
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleDeleteThread = async () => {
+    try {
+      await apiDosenClass.deleteThread(selectedData.id).then(() => {
+        setReloadData(!reloadData);
+        setOpenDelete(false);
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -100,6 +157,7 @@ export function DosenClassDetail() {
         <Tab label="Tugas" />
         <Tab label="Absen" />
         <Tab label="Rekap Absen" />
+        <Tab label="Ruang Diskusi" />
       </Tabs>
 
       <TabPanel value={value} index={0}>
@@ -165,7 +223,7 @@ export function DosenClassDetail() {
                 <span
                   onClick={() => {
                     setSelectedData(row);
-                    setOpenDelete(true);
+                    setOpenDeleteThread(true);
                   }}
                   className="inline-block bg-red-500 rounded-full px-3 py-1 text-sm font-semibold text-white cursor-pointer"
                 >
@@ -245,6 +303,94 @@ export function DosenClassDetail() {
           </Table>
         </TableContainer>
       </TabPanel>
+      <TabPanel value={value} index={4}>
+        <div className="mt-2 bg-white">
+          <TextField
+            label="Buat Diskusi"
+            value={thread}
+            onChange={(e) => setThread(e.target.value)}
+            variant="outlined"
+            fullWidth
+            multiline
+            className="bg-white"
+          />
+          <div className="flex justify-end">
+            <Button
+              variant="contained"
+              className="mt-2"
+              disabled={!thread}
+              onClick={handleSendThread}
+            >
+              Kirim
+            </Button>
+          </div>
+        </div>
+
+        {threads.map((row) => {
+          const date = new Date(row.created_at);
+
+          const options = {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          };
+
+          const formattedTime = date.toLocaleTimeString("id-ID", {
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+
+          const formattedDate = date.toLocaleDateString("id-ID", options);
+          const formattedDateTime = `${formattedDate} ${formattedTime}`;
+          return (
+            <div className="w-full p-4 mt-4 rounded overflow-hidden shadow-lg">
+              <div className="flex gap-2 items-center">
+                <Avatar name={row.name} />
+                <div className="flex flex-col">
+                  <div className="font-bold">{row.name}</div>
+                  <div className="text-gray-500 text-sm">
+                    {formattedDateTime}
+                  </div>
+                </div>
+              </div>
+              <p className="mt-2 text-gray-800">{row.content}</p>
+              <div className="flex justify-between gap-1 items-center">
+                <div className="flex items-center gap-2">
+                  {row.isLike ? (
+                    <AiFillLike
+                      onClick={() => handleLike(row.id)}
+                      className="cursor-pointer text-lg text-blue-500"
+                    />
+                  ) : (
+                    <AiOutlineLike
+                      onClick={() => handleLike(row.id)}
+                      className="cursor-pointer text-lg"
+                    />
+                  )}
+                  {row.likes}
+                  <Link
+                    to={`/dosen/kelas/diskusi/${row.id}`}
+                    className="cursor-pointer no-underline text-center text-gray-500"
+                  >
+                    <AiOutlineComment/>
+                  </Link>
+                  {row.replies}
+                </div>
+
+                {row.isMe && (
+                  <FaTrashAlt
+                    onClick={() => {
+                      setSelectedData(row);
+                      setOpenDelete(true);
+                    }}
+                    className="text-gray-700 cursor-pointer"
+                  />
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </TabPanel>
       <TugasForm
         method="add"
         open={openForm}
@@ -286,6 +432,11 @@ export function DosenClassDetail() {
         open={openDelete}
         onClose={() => setOpenDelete(false)}
         handleDelete={handleDelete}
+      />
+      <ModalDelete
+        open={openDeleteThread}
+        onClose={() => setOpenDeleteThread(false)}
+        handleDelete={handleDeleteThread}
       />
       <MateriForm
         method="add"

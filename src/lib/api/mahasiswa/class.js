@@ -10,12 +10,17 @@ const uploadTugas = (data) =>
   instance.auth.post(`/mahasiswa/tugas/upload`, data);
 
 const calendar = () => instance.auth.get("/mahasiswa/calendar");
+const recapAttendance = (id) => instance.auth.get(`/mahasiswa/mapel/absen/${id}`);
 
-const createThread = (data) => instance.auth.post(`/mahasiswa/thread`, data)
+const createThread = (data) => instance.auth.post(`/mahasiswa/thread`, data);
 const listThread = (id) => instance.auth.get(`/mahasiswa/mapel/${id}/thread`);
 const likeThread = (data) =>
   instance.auth.post(`/mahasiswa/thread/likes`, data);
-const deleteThread = (id) => instance.auth.delete(`/mahasiswa/thread/${id}`)  
+const deleteThread = (id) => instance.auth.delete(`/mahasiswa/thread/${id}`);
+const createReplies = (data) =>
+  instance.auth.post(`/mahasiswa/thread/replies`, data);
+const detailThread = (id) => instance.auth.get(`/mahasiswa/thread/${id}`);
+const deleteReplies = (id) => instance.auth.delete(`/mahasiswa/replies/${id}`);
 
 const apiMahasiswaClass = {
   subjectList,
@@ -25,10 +30,14 @@ const apiMahasiswaClass = {
   detailTugas,
   uploadTugas,
   calendar,
+  recapAttendance,
   createThread,
   listThread,
   likeThread,
-  deleteThread
+  deleteThread,
+  createReplies,
+  detailThread,
+  deleteReplies,
 };
 
 export default apiMahasiswaClass;
