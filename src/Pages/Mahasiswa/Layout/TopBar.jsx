@@ -35,6 +35,7 @@ export function TopBar() {
           <div className="mr-4">
             {user.nama}
             <IconButton onClick={handleClick} color="white">
+              
               <FaUserCircle size="25" />
             </IconButton>
             <Menu

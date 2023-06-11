@@ -2,13 +2,9 @@ import { useEffect, useState } from "react";
 import { Layout } from "../Layout/Layout";
 import { Link, useParams } from "react-router-dom";
 import apiMahasiswaClass from "../../../lib/api/mahasiswa/class";
-import { FaEye } from "react-icons/fa";
-import { GrScorecard } from "react-icons/gr";
 import { Controller, useForm } from "react-hook-form";
-import { PDFFileUploader } from "../../../Component/Input";
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import { AiOutlineClose, AiOutlineFilePdf } from "react-icons/ai";
-// import { PenilaianForm } from "./PenilaianForm";
 
 export function DetailTugas() {
   const { id } = useParams();
@@ -16,7 +12,7 @@ export function DetailTugas() {
   const date = new Date(data?.created_at);
   const formattedDate = date.toLocaleDateString("id-ID").replace(/\//g, "/");
   const [reloadTable, setReloadTable] = useState(false);
-  const { control, handleSubmit, reset } = useForm({
+  const { control } = useForm({
     mode: "onSubmit",
   });
   const [files, setFiles] = useState();
@@ -46,6 +42,11 @@ export function DetailTugas() {
     });
   };
 
+  const handleDelete = async () =>{
+    console.log(data)
+    await apiMahasiswaClass.deleteTugas(data.pengumpulan[0].id).then(() => setReloadTable(!reloadTable))
+  }
+
   return (
     <>
       <Layout>
@@ -53,14 +54,18 @@ export function DetailTugas() {
           <div className="flex justify-between">
             <div class="text-2xl font-semibold"> {data?.title}</div>
             {data?.pengumpulan?.map((value) => {
-              if(value.nilai === "0"){
-                return <div class="text-lg font-semibold text-blue-800">
-                Proses Penilaian
-              </div>
-              } else{
-                return<div class="text-lg font-semibold text-blue-800">
-                Nilai : {value.nilai}
-              </div>
+              if (value.nilai === "0") {
+                return (
+                  <div class="text-lg font-semibold text-blue-800">
+                    Belum dinilai
+                  </div>
+                );
+              } else {
+                return (
+                  <div class="text-lg font-semibold text-blue-800">
+                    Nilai : {value.nilai}
+                  </div>
+                );
               }
             })}
           </div>
@@ -189,6 +194,9 @@ export function DetailTugas() {
                     {data?.pengumpulan[0]?.filename}
                   </Link>
                 </Box>
+                <IconButton onClick={handleDelete}>
+                  <AiOutlineClose />
+                </IconButton>
               </Box>
             </Box>
           )}

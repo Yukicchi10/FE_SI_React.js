@@ -30,6 +30,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import Avatar from "../../../Component/Avatar";
+import Swal from "sweetalert2";
 
 export function DosenClassDetail() {
   const [data, setData] = useState();
@@ -142,7 +143,7 @@ export function DosenClassDetail() {
         const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
         pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-        pdf.save("table.pdf");
+        pdf.save(`${data?.nama_mapel}.pdf`);
       })
       .catch((error) => {
         console.log(error);
@@ -426,6 +427,11 @@ export function DosenClassDetail() {
         onSuccess={() => {
           setReloadTable(!reloadTable);
           setOpenForm(false);
+          Swal.fire(
+            'Success!',
+            'Berhasil membuat tugas!',
+            'success'
+          )
         }}
       />
       <MeetingForm
@@ -473,6 +479,11 @@ export function DosenClassDetail() {
         onSuccess={() => {
           setReloadTable(!reloadTable);
           setOpenFormMateri(false);
+          Swal.fire(
+            'Success!',
+            'Berhasil Menambahkan Materi!',
+            'success'
+          )
         }}
       />
       <MateriForm

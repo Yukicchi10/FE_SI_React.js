@@ -31,13 +31,14 @@ import {
 import { CalendarAcademicStudent } from "../Pages/Mahasiswa/Calendar/CalendarAcademic";
 import DiscussionPage from "../Pages/Mahasiswa/Dashboard/DiscussionPage";
 import DosenDiscussionPage from "../Pages/Dosen/Dashboard/DosenDiscussionPage";
+import Login from "../Pages/Auth/Login";
 
 export function RoutePage() {
   return (
     <Routes>
       {/* Home Session */}
       <Route path="/" element={<Home />} />
-      <Route path="/login" element={<LoginMahasiswa />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/login/lecturer" element={<LoginDosen />} />
       <Route path="/login/admin" element={<LoginAdmin />} />
       <Route path="/about-us" element={<AboutUs />} />

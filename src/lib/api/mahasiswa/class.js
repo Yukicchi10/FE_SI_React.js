@@ -8,9 +8,11 @@ const listTugas = () => instance.auth.get(`/mahasiswa/tugas`);
 const detailTugas = (id) => instance.auth.get(`/mahasiswa/tugas/${id}`);
 const uploadTugas = (data) =>
   instance.auth.post(`/mahasiswa/tugas/upload`, data);
+const deleteTugas = (id) => instance.auth.delete(`/mahasiswa/tugas/${id}`);
 
 const calendar = () => instance.auth.get("/mahasiswa/calendar");
-const recapAttendance = (id) => instance.auth.get(`/mahasiswa/mapel/absen/${id}`);
+const recapAttendance = (id) =>
+  instance.auth.get(`/mahasiswa/mapel/absen/${id}`);
 
 const createThread = (data) => instance.auth.post(`/mahasiswa/thread`, data);
 const listThread = (id) => instance.auth.get(`/mahasiswa/mapel/${id}/thread`);
@@ -38,6 +40,7 @@ const apiMahasiswaClass = {
   createReplies,
   detailThread,
   deleteReplies,
+  deleteTugas,
 };
 
 export default apiMahasiswaClass;

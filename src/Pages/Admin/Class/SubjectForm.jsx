@@ -5,7 +5,6 @@ import { TimeForm, SelectForm, TextFieldForm } from "../../../Component/Input";
 import { useForm } from "react-hook-form";
 import { DAY_OPTIONS } from "../../../lib/constant";
 import { useParams } from "react-router-dom";
-import apiManageStudent from "../../../lib/api/admin/manageStudent";
 import apiManageLecturer from "../../../lib/api/admin/manageLecture";
 import apiManageSubject from "../../../lib/api/admin/manageSubject";
 
@@ -13,8 +12,8 @@ const INITIAL = {
   nama_mapel: "",
   deskripsi_mapel: "",
   day: "",
-  room:"",
-  sks:"",
+  room: "",
+  sks: "",
   start_time: new Date(),
   end_time: new Date(),
 };
@@ -55,8 +54,11 @@ export function SubjectForm({
   useEffect(() => {
     const getData = () => {
       if (initialValue) {
-        setInitialBody(initialValue);
-        reset(initialValue);
+        const body = initialValue;
+        body.start_time = new Date();
+        body.end_time = new Date();
+        setInitialBody(body);
+        reset(body);
       }
     };
     getData();

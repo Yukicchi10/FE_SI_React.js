@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Layout } from "../Layout/Layout";
-import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import apiDosenClass from "../../../lib/api/dosen/class";
 import { FiExternalLink } from "react-icons/fi";
@@ -44,11 +43,3 @@ export function MateriDosenPage() {
     </Layout>
   );
 }
-
-const TabPanel = ({ children, value, index }) => {
-  return (
-    <div className={`${value !== index ? "hidden" : ""}`}>
-      {value === index && <Box>{children}</Box>}
-    </div>
-  );
-};

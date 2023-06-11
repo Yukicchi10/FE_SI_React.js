@@ -78,7 +78,7 @@ export function AdminClassDetail() {
         <h6 class="text-2xl font-semibold mb-3"> {data?.nama_kelas}</h6>
         <p class="text-lg"> {data?.angkatan}</p>
       </div>
-      <div className="flex mt-2 items-center" >
+      <div className="flex mt-2 items-center">
         <div>
           <IconButton onClick={handleClick} color="white">
             <FiMenu className="" />
@@ -253,7 +253,10 @@ export function AdminClassDetail() {
         method="edit"
         open={openEditMapel}
         initialValue={selectedData}
-        onClose={() => setOpenEditMapel(false)}
+        onClose={() => {
+          setReloadTable(!reloadTable);
+          setOpenEditMapel(false);
+        }}
         onSuccess={() => {
           setReloadTable(!reloadTable);
           setOpenEditMapel(false);

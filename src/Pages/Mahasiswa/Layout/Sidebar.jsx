@@ -1,4 +1,4 @@
-import { FaBook, FaCalendar, FaCalendarAlt, FaChalkboardTeacher, FaHome, FaTasks, FaUserCog } from 'react-icons/fa';
+import { FaBook, FaCalendarAlt, FaHome, FaTasks, FaUserCog } from 'react-icons/fa';
 import logoSI from '../../../Img/LogoSI1.png'
 import { Link } from 'react-router-dom';
 
