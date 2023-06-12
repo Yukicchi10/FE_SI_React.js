@@ -55,7 +55,7 @@ function BasicExample() {
               >
                 Sistem Informasi
               </NavDropdown.Item>
-              <NavDropdown.Item href="/home/profil-dosen">
+              <NavDropdown.Item href="/profil-dosen">
                 Dosen Pengajar
               </NavDropdown.Item>
             </NavDropdown>

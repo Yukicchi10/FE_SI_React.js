@@ -32,6 +32,7 @@ import { CalendarAcademicStudent } from "../Pages/Mahasiswa/Calendar/CalendarAca
 import DiscussionPage from "../Pages/Mahasiswa/Dashboard/DiscussionPage";
 import DosenDiscussionPage from "../Pages/Dosen/Dashboard/DosenDiscussionPage";
 import Login from "../Pages/Auth/Login";
+import ListDosen from "../Pages/HomePage/ProfilDosen/ProfilDosen";
 
 export function RoutePage() {
   return (
@@ -42,7 +43,7 @@ export function RoutePage() {
       <Route path="/login/lecturer" element={<LoginDosen />} />
       <Route path="/login/admin" element={<LoginAdmin />} />
       <Route path="/about-us" element={<AboutUs />} />
-      <Route path="/home/profil-dosen" element={<ProfilDosen />} />
+      <Route path="/profil-dosen" element={<ListDosen />} />
 
       {/* Admin Session */}
       <Route path="/admin/dashboard" element={<DashboardAdminPage />} />
