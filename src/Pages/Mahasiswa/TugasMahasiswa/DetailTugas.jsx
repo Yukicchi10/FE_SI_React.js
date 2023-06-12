@@ -5,11 +5,12 @@ import apiMahasiswaClass from "../../../lib/api/mahasiswa/class";
 import { Controller, useForm } from "react-hook-form";
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import { AiOutlineClose, AiOutlineFilePdf } from "react-icons/ai";
+import Swal from "sweetalert2";
 
 export function DetailTugas() {
   const { id } = useParams();
   const [data, setData] = useState();
-  const date = new Date(data?.created_at);
+  const date = new Date(data?.deadline);
   const formattedDate = date.toLocaleDateString("id-ID").replace(/\//g, "/");
   const [reloadTable, setReloadTable] = useState(false);
   const { control } = useForm({
@@ -33,19 +34,21 @@ export function DetailTugas() {
   }, [reloadTable]);
 
   const onSubmit = async () => {
-    console.log(id);
     const fd = new FormData();
     fd.append("id_tugas", id);
     fd.append("file", files);
     await apiMahasiswaClass.uploadTugas(fd).then(() => {
       setReloadTable(!reloadTable);
+      Swal.fire("Success!", "Berhasil Mengumpulkan Tugas!", "success");
     });
   };
 
-  const handleDelete = async () =>{
-    console.log(data)
-    await apiMahasiswaClass.deleteTugas(data.pengumpulan[0].id).then(() => setReloadTable(!reloadTable))
-  }
+  const handleDelete = async () => {
+    console.log(data);
+    await apiMahasiswaClass
+      .deleteTugas(data.pengumpulan[0].id)
+      .then(() => setReloadTable(!reloadTable));
+  };
 
   return (
     <>
@@ -69,7 +72,7 @@ export function DetailTugas() {
               }
             })}
           </div>
-          <div className="text-gray-500 text-sm"> {formattedDate}</div>
+          <div className="text-gray-500 text-sm italic">Deadline: {formattedDate}</div>
           <div className="text-lg mt-2 bg-gray-100  p-2 rounded text-gray-500 mb-4">
             {data?.description}
           </div>
@@ -194,9 +197,11 @@ export function DetailTugas() {
                     {data?.pengumpulan[0]?.filename}
                   </Link>
                 </Box>
-                <IconButton onClick={handleDelete}>
-                  <AiOutlineClose />
-                </IconButton>
+                {data?.pengumpulan[0]?.nilai === "0" && (
+                  <IconButton onClick={handleDelete}>
+                    <AiOutlineClose />
+                  </IconButton>
+                )}
               </Box>
             </Box>
           )}

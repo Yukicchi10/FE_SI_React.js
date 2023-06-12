@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
 import { ModalForm } from "../../../Component/Modal";
-import { TextFieldForm } from "../../../Component/Input";
+import { DateForm, TextFieldForm } from "../../../Component/Input";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import apiManageSubject from "../../../lib/api/admin/manageSubject";
@@ -10,6 +10,7 @@ import apiDosenClass from "../../../lib/api/dosen/class";
 const INITIAL = {
   title: "",
   description: "",
+  deadline: new Date(),
 };
 
 export function TugasForm({ open, onClose, method, initialValue, onSuccess }) {
@@ -27,6 +28,8 @@ export function TugasForm({ open, onClose, method, initialValue, onSuccess }) {
   useEffect(() => {
     const getData = () => {
       if (initialValue) {
+        const body = initialValue
+        body.deadline = new Date()
         setInitialBody(initialValue);
         reset(initialValue);
       }
@@ -35,7 +38,7 @@ export function TugasForm({ open, onClose, method, initialValue, onSuccess }) {
   }, [initialValue]);
 
   const onSubmit = async (data) => {
-    const body = data
+    const body = data;
     body.id_mapel = id;
     console.log(data);
     if (method === "add") {
@@ -76,7 +79,15 @@ export function TugasForm({ open, onClose, method, initialValue, onSuccess }) {
               multiline={3}
               minRows={3}
             />
-          </Grid>
+          </Grid>{" "}
+          <Grid item md={12} xs={12}>
+            <DateForm
+              label="Deadline"
+              control={control}
+              name="deadline"
+              placeholder="Masukkan Deadline"
+            />
+          </Grid>{" "}
         </Grid>
       </ModalForm>
     </form>

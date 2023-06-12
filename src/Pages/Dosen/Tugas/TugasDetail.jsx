@@ -44,40 +44,50 @@ export function TugasDetail() {
                 <TableCell className="!font-bold">NO</TableCell>
                 <TableCell className="!font-bold">NIM</TableCell>
                 <TableCell className="!font-bold">Nama</TableCell>
+                <TableCell className="!font-bold">Status</TableCell>
                 <TableCell className="!font-bold">Nilai</TableCell>
                 <TableCell className="!font-bold"></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {data?.pengumpulan?.map((row, index) => (
-                <TableRow key={row.id}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell>{row.nim}</TableCell>
-                  <TableCell>{row.nama_mahasiswa}</TableCell>
-                  <TableCell>
-                    {row.nilai === "0" ? "Belum Dinilai" : row.nilai}
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex gap-2 items-center">
-                      <Link
-                        to={row.file}
-                        target="_blank"
-                        className="no-underline mr-2 rounded py-2 text-sm font-semibold cursor-pointer"
-                      >
-                        {" "}
-                        <FaEye className="text-blue-500 cursor-pointer" />
-                      </Link>
-                      <GrScorecard
-                        onClick={() => {
-                          setSelectedData(row);
-                          setOpen(true);
-                        }}
-                        className="!ext-green-500 cursor-pointer"
-                      />
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
+              {data?.pengumpulan?.map((row, index) => {
+                const deadlineDate = new Date(data?.deadline);
+                const pengumpulanDate = new Date(row?.created_at);
+                return (
+                  <TableRow key={row.id}>
+                    <TableCell>{index + 1}</TableCell>
+                    <TableCell>{row.nim}</TableCell>
+                    <TableCell>{row.nama_mahasiswa}</TableCell>
+                    <TableCell>
+                      {pengumpulanDate <= deadlineDate
+                        ? "Tepat Waktu"
+                        : "Terlambat"}
+                    </TableCell>
+                    <TableCell>
+                      {row.nilai === "0" ? "Belum Dinilai" : row.nilai}
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex gap-2 items-center">
+                        <Link
+                          to={row.file}
+                          target="_blank"
+                          className="no-underline mr-2 rounded py-2 text-sm font-semibold cursor-pointer"
+                        >
+                          {" "}
+                          <FaEye className="text-blue-500 cursor-pointer" />
+                        </Link>
+                        <GrScorecard
+                          onClick={() => {
+                            setSelectedData(row);
+                            setOpen(true);
+                          }}
+                          className="!ext-green-500 cursor-pointer"
+                        />
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </TableContainer>
