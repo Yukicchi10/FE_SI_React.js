@@ -223,34 +223,49 @@ export function DosenClassDetail() {
           >
             Tambah Tugas
           </button>
-          {data?.tugas.map((row) => (
-            <div className="w-full mt-4 border-l-yellow-500 border-l-8 rounded overflow-hidden shadow-lg">
-              <div className="px-6 py-4">
-                <div className="font-bold text-xl">{row.title}</div>
-                <div>{row.description}</div>
+          {data?.tugas.map((row) => {
+            const date = new Date(row?.deadline);
+            const formattedDate = date
+              .toLocaleDateString("id-ID")
+              .replace(/\//g, "/");
+            const timestamp = new Date(row?.deadline_time);
+            const timeString = timestamp.toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            });
+
+            return (
+              <div className="w-full mt-4 border-l-yellow-500 border-l-8 rounded overflow-hidden shadow-lg">
+                <div className="px-6 py-4">
+                  <div className="font-bold text-xl">{row.title}</div>
+                  <div className="text-gray-500 text-sm italic">
+                    Deadline: {formattedDate} {timeString} 
+                  </div>
+                  <div>{row.description}</div>
+                </div>
+                <div className="flex gap-2 px-6 pb-4">
+                  <span
+                    onClick={() => {
+                      setSelectedData(row);
+                      setOpenEdit(true);
+                    }}
+                    class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 cursor-pointer"
+                  >
+                    Edit
+                  </span>
+                  <span
+                    onClick={() => {
+                      setSelectedData(row);
+                      setOpenDeleteThread(true);
+                    }}
+                    className="inline-block bg-red-500 rounded-full px-3 py-1 text-sm font-semibold text-white cursor-pointer"
+                  >
+                    Hapus
+                  </span>
+                </div>
               </div>
-              <div className="flex gap-2 px-6 pb-4">
-                <span
-                  onClick={() => {
-                    setSelectedData(row);
-                    setOpenEdit(true);
-                  }}
-                  class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 cursor-pointer"
-                >
-                  Edit
-                </span>
-                <span
-                  onClick={() => {
-                    setSelectedData(row);
-                    setOpenDeleteThread(true);
-                  }}
-                  className="inline-block bg-red-500 rounded-full px-3 py-1 text-sm font-semibold text-white cursor-pointer"
-                >
-                  Hapus
-                </span>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={2}>
@@ -427,11 +442,7 @@ export function DosenClassDetail() {
         onSuccess={() => {
           setReloadTable(!reloadTable);
           setOpenForm(false);
-          Swal.fire(
-            'Success!',
-            'Berhasil membuat tugas!',
-            'success'
-          )
+          Swal.fire("Success!", "Berhasil membuat tugas!", "success");
         }}
       />
       <MeetingForm
@@ -479,11 +490,7 @@ export function DosenClassDetail() {
         onSuccess={() => {
           setReloadTable(!reloadTable);
           setOpenFormMateri(false);
-          Swal.fire(
-            'Success!',
-            'Berhasil Menambahkan Materi!',
-            'success'
-          )
+          Swal.fire("Success!", "Berhasil Menambahkan Materi!", "success");
         }}
       />
       <MateriForm

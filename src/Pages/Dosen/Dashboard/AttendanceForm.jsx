@@ -30,8 +30,7 @@ export function AttendanceForm({ open, onClose, selectedData, onSuccess }) {
       console.log(e);
     }
   };
-  console.log(selectedData);
-
+  
   return (
     <Modal open={open} onClose={onClose}>
       <div data-cy="modal-information" className="bg-white p-5 rounded">

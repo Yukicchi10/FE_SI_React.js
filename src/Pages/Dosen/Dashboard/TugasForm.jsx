@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
 import { ModalForm } from "../../../Component/Modal";
-import { DateForm, TextFieldForm } from "../../../Component/Input";
+import { DateForm, TextFieldForm, TimeForm } from "../../../Component/Input";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import apiManageSubject from "../../../lib/api/admin/manageSubject";
@@ -28,8 +28,9 @@ export function TugasForm({ open, onClose, method, initialValue, onSuccess }) {
   useEffect(() => {
     const getData = () => {
       if (initialValue) {
-        const body = initialValue
-        body.deadline = new Date()
+        const body = initialValue;
+        body.deadline = new Date();
+        body.deadline_time = new Date();
         setInitialBody(initialValue);
         reset(initialValue);
       }
@@ -40,7 +41,10 @@ export function TugasForm({ open, onClose, method, initialValue, onSuccess }) {
   const onSubmit = async (data) => {
     const body = data;
     body.id_mapel = id;
-    console.log(data);
+    // body.deadline_time = new Date(data.deadline_time).toLocaleTimeString([], {
+    //   hour: "2-digit",
+    //   minute: "2-digit",
+    // });
     if (method === "add") {
       await apiDosenClass.storeTugas(body).then(() => {
         onSuccess();
@@ -80,14 +84,22 @@ export function TugasForm({ open, onClose, method, initialValue, onSuccess }) {
               minRows={3}
             />
           </Grid>{" "}
-          <Grid item md={12} xs={12}>
+          <Grid item md={6} xs={12}>
             <DateForm
-              label="Deadline"
+              label="Deadline tanggal"
               control={control}
               name="deadline"
               placeholder="Masukkan Deadline"
             />
-          </Grid>{" "}
+          </Grid>
+          <Grid item md={6} xs={12}>
+            <TimeForm
+              label="Deadline waktu"
+              control={control}
+              name="deadline_time"
+              placeholder="Masukkan Batas akhir pengumpulan"
+            />
+          </Grid>
         </Grid>
       </ModalForm>
     </form>

@@ -16,6 +16,8 @@ import {
   Paper,
   TableRow,
   TableContainer,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import { FiExternalLink } from "react-icons/fi";
 import { Link, useParams } from "react-router-dom";
@@ -92,6 +94,22 @@ export function StudentClassDetail() {
     }
   };
 
+  const handleAbsen = async (value, id) => {
+    console.log(data.pertemuan);
+    const body = {
+      id_pertemuan: data.pertemuan[data.pertemuan.length - 1].id,
+      status: value,
+    };
+    console.log(body);
+    try {
+      await apiMahasiswaClass.checkAttendance(body).then(() => {
+        setReloadData(!reloadData);
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <Layout>
       <div className="hero-banner">
@@ -155,6 +173,25 @@ export function StudentClassDetail() {
         ))}
       </TabPanel>
       <TabPanel value={value} index={2}>
+        <div class="flex justify-between border-t-8 border-blue-500 mt-4 items-center bg-gradient-to-r from-blue-200 to-blue-400 text-blue-800 shadow-lg rounded-lg p-3">
+          <div>
+            <h6 class="text-2xl font-semibold">Absensi Mandiri</h6>
+            <p class="">Konfirmasi kehadiran untuk pertemuan ke {data.pertemuan.length} </p>
+          </div>
+          <Select
+            defaultValue="-"
+            onChange={(e) => handleAbsen(e.target.value)}
+            className="text-white"
+          >
+            <MenuItem disabled value="-">
+              Status
+            </MenuItem>
+            <MenuItem value="Hadir">Hadir</MenuItem>
+            <MenuItem value="Sakit">Sakit</MenuItem>
+            <MenuItem value="Izin">Izin</MenuItem>
+            <MenuItem value="Tanpa Keterangan">Tanpa Keterangan</MenuItem>
+          </Select>
+        </div>
         <TableContainer component={Paper} className="mt-2">
           <Table>
             <TableHead>

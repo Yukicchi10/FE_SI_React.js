@@ -52,6 +52,17 @@ export function TugasDetail() {
             <TableBody>
               {data?.pengumpulan?.map((row, index) => {
                 const deadlineDate = new Date(data?.deadline);
+                const deadlineTime = new Date(data?.deadline_time);
+                const deadlineTimeString = deadlineTime.toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                });
+                const pengumpulanTime = new Date(row?.created_at);
+                const pengumpulanTimeString =
+                  pengumpulanTime.toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  });
                 const pengumpulanDate = new Date(row?.created_at);
                 return (
                   <TableRow key={row.id}>
@@ -59,8 +70,11 @@ export function TugasDetail() {
                     <TableCell>{row.nim}</TableCell>
                     <TableCell>{row.nama_mahasiswa}</TableCell>
                     <TableCell>
-                      {pengumpulanDate <= deadlineDate
-                        ? "Tepat Waktu"
+                      {pengumpulanDate < deadlineDate
+                        ? "Tepat Waktuk"
+                        : pengumpulanDate === deadlineDate &&
+                          pengumpulanTimeString < deadlineTimeString
+                        ? "Tepat Waktup"
                         : "Terlambat"}
                     </TableCell>
                     <TableCell>

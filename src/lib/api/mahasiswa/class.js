@@ -13,6 +13,8 @@ const deleteTugas = (id) => instance.auth.delete(`/mahasiswa/tugas/${id}`);
 const calendar = () => instance.auth.get("/mahasiswa/calendar");
 const recapAttendance = (id) =>
   instance.auth.get(`/mahasiswa/mapel/absen/${id}`);
+const checkAttendance = (data) =>
+  instance.auth.post(`/mahasiswa/absen`, data);
 
 const createThread = (data) => instance.auth.post(`/mahasiswa/thread`, data);
 const listThread = (id) => instance.auth.get(`/mahasiswa/mapel/${id}/thread`);
@@ -32,6 +34,7 @@ const apiMahasiswaClass = {
   detailTugas,
   uploadTugas,
   calendar,
+  checkAttendance,
   recapAttendance,
   createThread,
   listThread,
