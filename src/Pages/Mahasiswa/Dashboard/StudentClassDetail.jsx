@@ -95,7 +95,6 @@ export function StudentClassDetail() {
   };
 
   const handleAbsen = async (value, id) => {
-    console.log(data.pertemuan);
     const body = {
       id_pertemuan: data.pertemuan[data.pertemuan.length - 1].id,
       status: value,
@@ -176,7 +175,7 @@ export function StudentClassDetail() {
         <div class="flex justify-between border-t-8 border-blue-500 mt-4 items-center bg-gradient-to-r from-blue-200 to-blue-400 text-blue-800 shadow-lg rounded-lg p-3">
           <div>
             <h6 class="text-2xl font-semibold">Absensi Mandiri</h6>
-            <p class="">Konfirmasi kehadiran untuk pertemuan ke {data.pertemuan.length} </p>
+            <p class="">Konfirmasi kehadiran untuk pertemuan ke {data?.pertemuan?.length} </p>
           </div>
           <Select
             defaultValue="-"
