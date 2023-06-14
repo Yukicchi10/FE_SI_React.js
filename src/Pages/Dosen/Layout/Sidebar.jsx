@@ -1,12 +1,14 @@
 import { FaBook, FaCalendar, FaCalendarAlt, FaChalkboardTeacher, FaHome, FaTasks, FaUserCog } from 'react-icons/fa';
 import './SideBarDosen.css'
 import { Link } from 'react-router-dom';
+import logoSI from "../../../Img/LogoSI1.png";
 
 const SideBarDosen = () => {
   return (
     <div className="fixed top-0 left-0 h-screen w-16 flex flex-col
                   bg-white dark:bg-gray-900 shadow-lg">
-                    
+
+        <img src={logoSI} className="logsi" />           
         <SideBarIcon icon={<FaHome size="28"/>} text="Dashboard" url='/dosen/dashboard' />
         {/* <SideBarIcon icon={<FaCalendar size="25" />} text="Absensi" url='/dosen/absen' /> */}
         <Divider/>
