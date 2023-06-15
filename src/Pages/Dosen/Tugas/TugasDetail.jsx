@@ -71,10 +71,10 @@ export function TugasDetail() {
                     <TableCell>{row.nama_mahasiswa}</TableCell>
                     <TableCell>
                       {pengumpulanDate < deadlineDate
-                        ? "Tepat Waktuk"
+                        ? "Tepat Waktu"
                         : pengumpulanDate === deadlineDate &&
                           pengumpulanTimeString < deadlineTimeString
-                        ? "Tepat Waktup"
+                        ? "Tepat Waktu"
                         : "Terlambat"}
                     </TableCell>
                     <TableCell>
