@@ -172,7 +172,7 @@ export function AdminClassDetail() {
                 <TableCell className="!font-bold">Ruang</TableCell>
                 <TableCell className="!font-bold">Hari</TableCell>
                 <TableCell className="!font-bold">Waktu</TableCell>
-                <TableCell className="!font-bold">Aksi</TableCell>
+                <TableCell className="!font-bold">Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

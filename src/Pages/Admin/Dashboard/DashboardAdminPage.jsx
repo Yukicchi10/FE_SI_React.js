@@ -16,8 +16,8 @@ export function DashboardAdminPage() {
     <Layout>
       <div className="bg-blue-700 text-white py-16 px-4 rounded">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold mb-4">Welcome to the Dashboard</h1>
-        <p className="text-lg">Manage your lecturer, student and class.</p>
+        <h1 className="text-4xl font-bold mb-4">Admin Dashboard</h1>
+        <p className="text-lg">Mengelola Dosen, Mahasiswa dan Kelas.</p>
       </div>
     </div>
     <div className="flex flex-col sm:flex-row gap-4 space-x-4 mt-4">
